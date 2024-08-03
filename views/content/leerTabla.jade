@@ -1,0 +1,93 @@
+extends ../layout/layout
+
+block content
+    if isOk    
+        p LA TABLA A MOSTRAR ES : #{nombreTabla}
+
+        //filtros
+        .btn-group.dropend
+            button.btn.btn-secondary.dropdown-toggle(type='button' data-bs-toggle='dropdown' aria-expanded='false')
+                | Dropend
+            ul.dropdown-menu
+                // Dropdown menu links
+                li
+                    a.dropdown-item(href='/tablas/producto') Producto
+                li
+                       a.dropdown-item(href='/tablas/tipo-producto') tipo productos
+        
+        button.btn.btn-primary(type='button') Nuevo
+
+        .card
+            .card-body
+                .row.g-3.align-items-center
+                    form 
+                        .col-auto
+                            input#inputPassword6.form-control(type='text' aria-describedby='passwordHelpInline')
+                        .col-auto
+                            input#inputPassword6.form-control(type='text' aria-describedby='passwordHelpInline' placeholder="Cantidad" )
+                        .col-auto
+                            select.form-select(aria-label='Default select example')
+                                option(selected) Open this select menu
+                                option(value='1') One
+                                option(value='2') Two
+                                option(value='3') Three
+
+
+
+              
+
+
+        //bootstrap tabla
+        .row
+            .col12
+               table.table.table-bordered.border-primary
+                    thead
+                        tr
+                            each item in tHead
+                                th= item
+                            //
+                                <th>Categoría</th>
+                                <th>Nombre del Producto</th>
+                                <th>Cantidad</th>
+                                <th>Código</th>
+                                <th>Precio</th>
+                    tbody#tbody
+                        each item in tBody  
+                            tr
+
+                                each val, index in item
+                                    
+                                    if index == 'ultimo'
+                                        td 
+                                            button.btn.btn-success(type='button' data-bs-toggle='modal' data-bs-target='#exampleModal')  
+                                                |Actualizar
+                                            include modal/actualizar
+                                        td
+                                            button.btn.btn-danger(type='button') 
+                                                |Eliminar
+                                            
+                                    else   
+                                        td=val 
+
+
+        // boots de paginacion                            
+        nav(aria-label='Page navigation example')
+            ul.pagination.justify-content-end
+                li.page-item.disabled
+                    a.page-link(href='#' tabindex='-1') Previous
+                li.page-item
+                    a.page-link(href='#') 1
+                li.page-item
+                    a.page-link(href='#') 2
+                li.page-item
+                    a.page-link(href='#') 3
+                li.page-item
+                    a.page-link(href='#') Next
+
+                                
+    else 
+        script.
+            alert("Tabla no Encontrada")
+            window.location.href='http://localhost:3000/';
+                          
+                        
