@@ -5,11 +5,11 @@
 function enviarNuevaCategoria(){
 
     console.log(`ESTO ES CATEGORIA`)
-    var codigo = document.getElementById('nombre').value //Obtengo el valor del input nombre
-    console.log(codigo)
+    var categoria_nombre = document.getElementById('nombre').value //Obtengo el valor del input nombre
+    console.log(categoria_nombre)
     // nombre = JSON.stringify(nombre);
     // e.preventDefault()
-    console.log({codigo})
+    console.log({categoria_nombre})
     fetch('http://localhost:3000/categoria/nuevo',
          // fetch para enviar el dato
     {
@@ -23,7 +23,7 @@ function enviarNuevaCategoria(){
             "Access-Control-Allow-Methods": "POST, GET, PUT",
             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
         },
-        body:JSON.stringify( {codigo}) //Aquí se envía
+        body:JSON.stringify( {categoria_nombre}) //Aquí se envía
     })
     .then(res => res.json())
     .then(data => {

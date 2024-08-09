@@ -3,7 +3,8 @@
         .row.g-3.align-items-center
             form 
                 .col-auto
-                    input#inputPassword6.form-control(type='text' aria-describedby='passwordHelpInline')
+                    input#inputPassword6.form-control(type='text' aria-describedby='passwordHelpInline' placeholder="Precio Min")
+                    input#inputPassword6.form-control(type='text' aria-describedby='passwordHelpInline' placeholder="Precio Max")
                 .col-auto
                     input#inputPassword6.form-control(type='text' aria-describedby='passwordHelpInline' placeholder="Cantidad" )
                 .col-auto
@@ -11,3 +12,6 @@
                         each item in categoria
                             each val, key in item
                                 option(value=key) #{val}
+
+                button.btn.btn-success(type='button' data-bs-toggle='modal' data-bs-target='')  Buscar
+        
