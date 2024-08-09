@@ -1,41 +1,48 @@
 const mongoose = require('mongoose');
-//const uniqueValidator = require('mongoose-unique-validator');
-//const bcrypt = require('bcrypt-nodejs')
+const uniqueValidator = require('mongoose-unique-validator');
+const JWT = require('jsonwebtoken')
+const bcrypt = require('bcrypt-nodejs');
+const jsonwebtoken = require('jsonwebtoken');
+
 
 // let Client = mongoose.model('Client');
 
 let rolesValidos = {
     values: [
-        'SUPER_ROLE', 'ADMIN_ROLE', 
-        'TECH_LEAD_ROLE', 'SALES_LEAD_ROLE',
-        'TECH_EMPLOYEE_ROLE', 'SALES_EMPLOYEE_ROLE'
+        'ADMIN', 
+        'Almacenista',
+        'Reader'
     ],
     message: '{VALUE}, is no a valid role'
 };
 
-let validDepartments = {
+/*let validDepartments = {
     values: ['sales', 'tech', 'maintaing', 'service'],
     message: '{VALUE}, is not a valid deparment'
-};
+};*/
 
 const Schema = mongoose.Schema;
 
 
 let userSchema = new Schema({
-        name: {
+        nombre: {
             type: String,
-            required: [true, 'Name is needed']
+            required: [true, 'Nombre is needed']
         },
-        surname: {
+        apellido: {
             type: String,
-            required: [true, 'surname is needed']
+            required: [true, 'Apellido is needed']
         },
-        email: {
+        userName: {
+            type: String,
+            required: [true, 'username is needed']
+        },
+       /* email: {
             type: String,
             required: [true, 'email is needed'],
             unique: true,
             lowercase: true
-        },
+        },*/
         password: {
             type: String,
             required: [true, 'Password is needed']
@@ -45,18 +52,13 @@ let userSchema = new Schema({
             default: 'USER_ROLE',
             enum: rolesValidos
         },
-        img: {
+        /*img: {
             type: String,
             required: false
-        },
+        },*/
         isDelete: {
             type: Boolean,
             default: true
-        },
-        department: {
-            type: String,
-            required: false,
-            enum: validDepartments
         },
 
 }, {
@@ -90,6 +92,7 @@ userSchema.methods.compararPassword = function (password, callback) {
         };
         callback(null, sonIguales);
     })
+    //const token =  JWT.sign({})
 };
 
 userSchema.methods.toJSON = function () {

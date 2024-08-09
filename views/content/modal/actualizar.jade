@@ -1,12 +1,41 @@
-#exampleModal.modal.fade(tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true')
+#actualizarModal.modal.fade(tabindex='-1' aria-labelledby='actualizarModalLabel' aria-hidden='true')
     .modal-dialog
       .modal-content
         .modal-header
-          h1#exampleModalLabel.modal-title.fs-5 Modal title
-          button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+          if nombreTabla==='producto'
+            h1#actualizarModalLabel.modal-title.fs-5 Actualizar Producto
+            button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+
+          else 
+              h1#actualizarModalLabel.modal-title.fs-5 Actualizar Categoria
+              button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
         .modal-body
-          | ...
-          //ACTUALIZAR/ EL FORMULARIO VA ACA
+          
+          if nombreTabla==='producto'
+            //ACTUALIZAR/ EL FORMULARIO VA ACA
+            form(action="/Actualizar_Producto", method="put") 
+            
+              label(for="producto") Nombre 
+              input#producto.form-control(type='text' aria-describedby='passwordHelpInline' placeholder="Nombre" name= 'producto'  ) 
+              
+              label#cod(for="codigo") Codigo
+              input#codigo.form-control(type='text' aria-describedby='passwordHelpInline' placeholder="Código"  name="codigo") 
+              
+              label(for="precio") Precio
+              input#precio.form-control(type='text' aria-describedby='passwordHelpInline' placeholder="Precio" name="precio")
+              
+              label(for="stock") Stock
+              input#stock.form-control(type='text' aria-describedby='passwordHelpInline' placeholder="Stock" name="stock")
+              
+              label(for="categoria") Categoria
+              input#categoria.form-control(type='text' aria-describedby='passwordHelpInline' placeholder="Categoria" name="categoria") 
+          
+          else
+            form(action="/Actualizar_categoria", method="put") 
+              label#labelNombreCat(for="producto") Nombre 
+              input#inputPassword6.form-control(type='text' aria-describedby='passwordHelpInline' placeholder="Nombre de Categoria" ) 
+
+
         .modal-footer
-          button.btn.btn-secondary(type='button' data-bs-dismiss='modal') Close
-          button.btn.btn-primary(type='button') Save changes
+          button.btn.btn-secondary(type='button' data-bs-dismiss='modal') Cerrar
+          button.btn.btn-primary#actualizarCategoria(type='button', onclick="actualizarCategoria()") Save changes

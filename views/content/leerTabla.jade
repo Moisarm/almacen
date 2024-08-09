@@ -13,26 +13,16 @@ block content
                 li
                     a.dropdown-item(href='/tablas/producto') Producto
                 li
-                       a.dropdown-item(href='/tablas/tipo-producto') tipo productos
+                       a.dropdown-item(href='/tablas/tipo-producto') Categoria
         
-        button.btn.btn-primary(type='button') Nuevo
+        button.btn.btn-success(type='button' data-bs-toggle='modal' data-bs-target='#nuevaCatModal')  Nuevo
+         
+        include modal/nuevaCat
+        
+        if nombreTabla ==='producto'
+            include ./recurso/selecion
 
-        .card
-            .card-body
-                .row.g-3.align-items-center
-                    form 
-                        .col-auto
-                            input#inputPassword6.form-control(type='text' aria-describedby='passwordHelpInline')
-                        .col-auto
-                            input#inputPassword6.form-control(type='text' aria-describedby='passwordHelpInline' placeholder="Cantidad" )
-                        .col-auto
-                            select.form-select(aria-label='Default select example')
-                                option(selected) Open this select menu
-                                option(value='1') One
-                                option(value='2') Two
-                                option(value='3') Three
-
-
+        else 
 
               
 
@@ -40,7 +30,8 @@ block content
         //bootstrap tabla
         .row
             .col12
-               table.table.table-bordered.border-primary
+               table.table.table-bordered.border-primary 
+                    //table.table.table-dark
                     thead
                         tr
                             each item in tHead
@@ -54,12 +45,15 @@ block content
                     tbody#tbody
                         each item in tBody  
                             tr
+                                - let _id = ''
+                                each val, key in item
+                                    if key == "_id"
+                                        - _id = val
 
-                                each val, index in item
-                                    
-                                    if index == 'ultimo'
+
+                                    if key == 'ultimo'
                                         td 
-                                            button.btn.btn-success(type='button' data-bs-toggle='modal' data-bs-target='#exampleModal')  
+                                            button.btn.btn-success#showActualizar(type='button' data-bs-toggle='modal' data-bs-target='#actualizarModal'  onclick="catactua('"+ _id +"')")
                                                 |Actualizar
                                             include modal/actualizar
                                         td

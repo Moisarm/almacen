@@ -1,24 +1,35 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-// const db = require('./config/DB');
+/*Librerias*/
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const mod_fs = require('fs');
+const cors = require('cors');
+const jwt = require('jsonwebtoken');
+
+const bodyParser = require("body-parser"); 
+
 
 //const bootstrap_icons = require(`bootstrap-icons`)
 
 
-
-var LoginRouter = require('./routes/Login');
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+/*Declaración de las rutas*/
+const LoginRouter = require('./routes/Login');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const productoRouter = require('./routes/producto');
+const categoriaRouter= require('./routes/categoria');
+const historialRouter= require('./routes/historial');
 const { default: mongoose } = require('mongoose');
 
+
+/*Conexión a Base de Datos*/
 const ENV = require("./config/envConfig")
 
-// mongoose.set('useFindAndModify', false);
-// mongoose.set('useUnifiedTopology', true);
 mongoose.connect(ENV.MONGODB , {
+    // mongoose.set('useFindAndModify', false);
+    // mongoose.set('useUnifiedTopology', true);
     // useNewUrlParser:true,
     // useCreateIndex:true
 })
@@ -41,8 +52,32 @@ mongoose.connect(ENV.MONGODB , {
 
     })
 // console.log(`HOLA`)
-var app = express();
+const app = express();
 
+/*Config de Cors */
+const allowedOrigins = ["*"];
+
+const options = {
+    allowedHeaders: [
+        'Origin',
+        'X-Requested-With',
+        'Content-Type',
+        'Accept',
+        'X-Access-Token',
+      ],
+    credentials: true,
+    methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+    origin: allowedOrigins
+};
+app.use(cors(options));
+
+
+/*Jason Web Token */
+
+
+
+app.use(bodyParser.json());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -52,19 +87,33 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-//app.use(
- // express.static(path.join(__dirname, "node_modules/bootstrap/dist/"))
-//);
+
+
+/*Declaración de uso de dependencias visuales*/ 
 app.use("/",express.static("./node_modules/bootstrap/dist/"));
 app.use("/",express.static("./node_modules/@popperjs/core/dist"));
 app.use("/",express.static("./node_modules/bootstrap-icons/font"));
+
+
+
+//RUTAS
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/producto', productoRouter);
+app.use('/categoria', categoriaRouter);
+app.use('/historial',historialRouter);
 //app.use('/tablas', usersRouter);
+
+/*Recibir datos de formulario*/
+//app.put('Actualizar:nombreTabla', (req, res)=>{})
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+  
+  
+  res.redirect('/');
+  next();
 });
 
 // error handler

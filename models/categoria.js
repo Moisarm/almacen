@@ -4,7 +4,9 @@ const Schema = mongoose.Schema;
 
 const CategoriaSchema = new Schema({
 
-
+    //campos:
+    categoria_nombre:{type:String},
+    isDelete:{type:Boolean, default:false}
 	},{
         timestamps: true
     }

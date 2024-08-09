@@ -1,29 +1,38 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const _ = require('underscore');
-const Client = require('../../models/client');
+const Client = require('../../models/client'); //clase del modelo de la taba de mongo
 const app = express();
 
+//Leer
 let obtenerOperacion = async (query, select={}, optionsPage)=>{
-    const findOperaciones = await Auditoria.find(query).lean()
-                    .select(select)
-                    .sort({_id:-1})
-                    .skip(optionsPage.page * optionsPage.limit)
-                    .limit(optionsPage.limit)
-                    .then(async (ob)=>{
-
-                        console.log(`Find audit Operaciones:${JSON.stringify(ob)}`)
 
 
-                        const count = await Auditoria.find(query).lean()
-                        .countDocuments({})
-                        .sort({_id:-1})
+    const findOperaciones = await 
+                    Client //clase del modelo. 
+                    .find(query)// busqueda, el query debe ser un JSON.
+                    .lean()//---- simplifica el obj retornado, (se utiliza en base de datos GRANDES)
+                    .select(select)// obtiene las columnas espesificadas. 
+                    .sort({_id:-1}) //ordena la busqueda, de la mas nueva a la vieja.0
+                    .skip(optionsPage.page * optionsPage.limit)// paginacion: salta los objetos segun el numero colocado. 
+                    .limit(optionsPage.limit) ///paginacion: obtiene la cantidad de objetos indicada. 
+                    .then(async (ob)=>{ //resolver promesa de forma exitosa, (no garantiza traer objetos.)
 
+                        console.log(`Find audit Operaciones:${JSON.stringify(ob)}`) // muestra lo que trajo. 
+
+
+                        const count = await 
+                        Client //clase del modelo. 
+                        .find(query)// busqueda, el query debe ser un JSON.
+                        .lean()// simplifica el obj retornado, (se utiliza en base de datos GRANDES)
+                        .countDocuments({})//cuenta la cantidad de objetos traidos en la busqueda. (total, sin paginacion.)
+                        .sort({_id:-1}) //ordena la busqueda, de la mas nueva a la vieja.0
+                    
                         let response = {
-                            objects: count,
-                            pages: Math.round(count/this.optionsPage.limit),
-                            current: this.optionsPage.page+1,
-                            data:ob
+                            objects: count,//cantidad total
+                            pages: Math.round(count/optionsPage.limit), //cantidad de paginas, es la division de objetos totales entre el limite
+                            current: optionsPage.page+1, //pagina actual
+                            data:ob// registros encontrados
 
                         }
             
@@ -36,7 +45,7 @@ let obtenerOperacion = async (query, select={}, optionsPage)=>{
                          }
              
                     })    
-                    .catch((er)=>{
+                    .catch((er)=>{// promesa no resuelta por algun error
                         console.error(er);
                         
                          return { status: 400,
@@ -50,158 +59,73 @@ let obtenerOperacion = async (query, select={}, optionsPage)=>{
     return  findOperaciones
 }
 
-let getAllClients = (req,res) =>{
-
-    Client.find({state:true})
-        .exec((err, clientDB) => {
-
-            if (err) {
-                return res.status(500).json({
-                    ok: false,
-                    err
-                })
-            };
-
-            Client.countDocuments({}, (err, conteo) => {
-
-                res.json({
-                    ok: true,
-                    users: clientDB,
-                    quantity: conteo
-                });
-
-            });
-
-        });
-}
-
-let getAClient = (req, res) =>{
-
-    let id = req.params.id;
-
-    Client.findById(id)
-        .exec((err, ClientDB) => {
-
-            if (err) {
-                return res.status(500).json({
-                    ok: false,
-                    err
-                })
-            };
-
-            if (!ClientDB) {
-                return res.status(400).json({
-                    ok: false,
-                    err: {
-                        mensaje: "There isn´t a client with this id"
-                    }
-                });
-            };
-
-            res.json({
-                ok: true,
-                ClientDB
-            })
 
 
-        });
+// POST 
+//Crear nuevmos documentos en la base de datos
+let urlConfigSave = new Client({
+    campaig_Name:"{type:String}",
 
-}
+    requestors:"{type:String}",
+    description:"{type:String}",
 
-let postClient = (req, res) =>{
+    status: 1
+})
+    const urlConfigSaveRes = await urlConfigSave.save()
+    .then((ob)=>{
+        return {
+            status: 200,
+            code: 2000,
+            date: new Date(),
+            info: "url de cofiguracion guardada exitosamente",
+            response:ob
+            }
 
-    let body = req.body;
-    // console.log(body);
-
-    let client = new Client({
-        enterprise: body.enterprise,
-        business: body.business,
-        location: body.location
-    });
-
-    client.save((err, clientCreado) => {
-
-        if (err) {
-            return res.status(400).json({
-                ok: false,
-                err
-            });
-        };
-
-        res.json({
-            ok: true,
-            clientCreado
-        });
-
-    });
-
-
-}
-
-let putClient = (req, res) =>{
-    console.log(req.body);
-    let id = req.params.id;
-    let body = _.pick(req.body, ['enterprise', 'business', 'location', 'img']);
-
-    Client.findByIdAndUpdate(id, body, {new: true,runValidators: true,useFindAndModify: false}, (err, clientModificado) => {
-
-        if (err) {
-            // console.log(err);
-            return res.status(501).json({
-                ok: false,
-                err
-            })
-        };
-        if (!clientModificado) {
-            return res.status(400).json({
-                ok: false,
-                err: {
-                    mensaje: ' El id del cliente no existe '
+    })    
+    .catch((er)=>{
+        console.error(er);
+        
+            return { status: 400,
+                code: 4003,
+                date: new Date(),
+                info: "Error al guardar en BD url de cofiguracion", 
+                error:er
                 }
-            });
-        };
+    })
+    response = urlConfigSaveRes
 
-        res.json({
-            ok: true,
-            clientModificado
-        });
+///////////////////////////////////////////////////////////////////
+//PUT
+//actualizar en la base de datos
+    const updatePlanPago = await PlanPago.findOneAndUpdate(
+        query,
+        body
+        
+        )
+    .then((ob)=>{
+        console.log(`Update Plan de pago:${JSON.stringify(ob)}`)
 
+        return {
+            status: 200,
+            code: 2000,
+            date: new Date(),
+            info: "plan de pago guardado exitosamente",
+            response:ob
+            }
 
-    });
-
-
-}
-
-let deleteClient = (req, res) => {
-    console.log('hola estoy en delete client');
-    let id = req.params.id;
-    let cambiaEstado = {
-        state: false
-    }
-
-    Client.findByIdAndUpdate(id, cambiaEstado, {new: true,runValidators: true,useFindAndModify: false}, (err, clienteInhabilitado) => {
-
-        if (err) {
-            return res.status(400).json({
-                ok: false,
-                err
-            });
-        }
-
-        res.json({
-            ok: true,
-            clienteBorrado: clienteInhabilitado
-        });
-    // 
-    });
-
-}
-
+    })    
+    .catch((er)=>{
+        console.error(er);
+        
+            return{ status: 400,
+                code: 4003,
+                date: new Date(),
+                info: "Error al guardar en BD", 
+                error:er
+                }
+    })
+    response = updatePlanPago
 
 module.exports = {
-    getAllClients,
-    getAClient,
-    postClient,
-    putClient,
-    deleteClient
+    obtenerOperacion
 }
