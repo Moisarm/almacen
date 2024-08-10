@@ -3,39 +3,44 @@ const router = express.Router();
 const createError = require('http-errors');
 const {createUser} = require('../controller/user/user')
 
-router.post("/login", (req, res) => {
+
+const secretKey = "secret";
+const ENV = require(`../config/envConfig`);
+const { login, verifyToken } = require('../controller/Login/login');
+
+router.post("/", async (req, res) => {
   try {
+
     const username = req.body.username;
     const password = req.body.password;
-    if (!username || !password) {
-      return res.status(400).json({ message: "Username and password are required" });
-    }
-    if (username === "admin" && password === "123") {
-      const token = jwt.sign({ username }, secretKey, { expiresIn: "1h" });
-      return res.status(200).json({ token });
-    } else {
-      return res.status(401).json({ message: "Authentication failed" });
-    }
+
+    console.log(username, password)
+
+
+
+    let resp = await login(username, password)
+      return res.status(resp.status).json(resp);
+    // if (!username || !password) {
+    //   return res.status(400).json({ message: "Username and password are required" });
+    // }
+    // if (username === "admin" && password === "123") {
+    //   console.log(`COincide`)
+    //   const token = jwt.sign({ username }, ENV.JWT_SECRET, { expiresIn: ENV.JWT_EXPIRES });
+    //   return res.status(200).json({ token });
+    // } else {
+    //   return res.status(401).json({ message: "Authentication failed" });
+    // }
   } catch (error) {
+    console.log(error)
     return res.status(500).json({ message: "Internal server error" });
   }
 });
 
-function verifyToken(req, res, next) {
-  const header = req.header("Authorization") || "";
-  const token = header.split(" ")[1];
-  if (!token) {
-    return res.status(401).json({ message: "Token not provied" });
-  }
-  try {
-    const payload = jwt.verify(token, secretKey);
-    req.username = payload.username;
-    next();
-  } catch (error) {
-    return res.status(403).json({ message: "Token not valid" });
-  }
-}
+
 
 router.get("/protected", verifyToken, (req, res) => {
   return res.status(200).json({ message: "You have access" });
 });
+
+
+module.exports = router;
