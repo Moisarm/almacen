@@ -57,6 +57,11 @@ async function productoActual(Id) {
 
 async function acceder(){
 
+    /// CAPTURAR EL USER Y PASSW
+
+    let userName = document.getElementById('usuario').value
+    let password = document.getElementById('clave').value
+
 
     fetch('http://localhost:3000/login/',
         // fetch para enviar el dato
@@ -72,15 +77,21 @@ async function acceder(){
            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
        },
        body:JSON.stringify( {    
-        "username":"beto",
-        "password":"123459"
+        userName,
+        password
     }) //Aquí se envía
     })
     .then(res => res.json())
     .then(data => {
     console.log(data)
 
+
     window.sessionStorage.setItem(`token`, data.response.token)
+
+
+
+    window.location.assign("/dashboard/?token="+window.sessionStorage.getItem("token"))
+
     })
 
 
@@ -88,6 +99,10 @@ async function acceder(){
 
 
 }
+
+
+
+
 
 
 async function accederProducto(){

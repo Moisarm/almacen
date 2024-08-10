@@ -12,6 +12,12 @@ const { verifyToken } = require('../controller/Login/login');
 router.get('/',  function(req, res, next) {
 
 
+  res.render('content/login', { title: 'Express' , username:"Moises"});
+});
+
+router.get('/dashboard', verifyToken, function(req, res, next) {
+
+
   res.render('content/index', { title: 'Express' , username:"Moises"});
 });
 

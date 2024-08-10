@@ -1,0 +1,27 @@
+extends ../layout/layoutLogin
+
+block content
+  
+  body
+    .idk
+      form(action='')
+        h1 Login
+        .input-box
+          input#usuario(type='text', placeholder='Username', required='')
+          i#clave.bi.bi-person-circle
+        .input-box
+          input(type='password', placeholder='Password', required='')
+          i.bi.bi-lock-fill
+        .Recordar
+          label
+           // input(type='checkbox')
+            |  Recu&eacute;rdame
+        button.btn.btn-success(type='button'   onclick="acceder()" ) Login
+        .register-link
+          //p
+            | &iquest;Ingresar como observador?  
+            a(href='#')  Entrar como observador
+  
+  
+
+
