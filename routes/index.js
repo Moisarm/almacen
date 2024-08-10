@@ -5,10 +5,12 @@ const createError = require('http-errors');
 const mongoose= require('mongoose');
 const Producto = require('../models/producto');
 const { mostrarCategoria } = require('../controller/categoria/categoria');
-const {mostrarProducto}=require('../controller/productos/productos')
+const {mostrarProducto}=require('../controller/productos/productos');
+const { verifyToken } = require('../controller/Login/login');
+
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/',  function(req, res, next) {
 
 
   res.render('content/index', { title: 'Express' , username:"Moises"});

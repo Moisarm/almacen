@@ -1,6 +1,7 @@
 /*Codigos que le dan funcionalidad a las pantallas de Productos */
 var idActualizarCategoriaGlobal = ''
 var idActualizarProductoGlobal = ''
+var idActualizarUsuarioGlobal = ''
 
 
 function changeIdActualizar(id, nombreTabla){
@@ -10,9 +11,11 @@ function changeIdActualizar(id, nombreTabla){
 
         idActualizarProductoGlobal = id
 
-    }else{
+    }else if(nombreTabla==="tipo-producto"){
 
         idActualizarCategoriaGlobal = id
+    }else{
+        idActualizarUsuarioGlobal = id
     }
 }
 

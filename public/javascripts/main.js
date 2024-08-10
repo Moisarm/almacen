@@ -53,3 +53,11 @@ async function productoActual(Id) {
     let borrarCat = document.getElementById('nombre_cat_actualizar').
 }*/
 
+
+function acceder(){
+
+    window.location.replace("/almacen")
+
+}
+
+window.sessionStorage.setItem("token", "valor")

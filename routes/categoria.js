@@ -106,6 +106,8 @@ router.get('/:_id',async function(req, res, next){
     
 })
 
+
+//Eliminar Categoria
 router.put('/eliminar/:_id', async function (req, res, next) {
     try {
 
@@ -148,7 +150,7 @@ router.put('/eliminar/:_id', async function (req, res, next) {
     }
 })
 
-
+//Modificar
 router.put('/actualizar/:_id', async function (req, res, next) {
     try {
 

@@ -60,7 +60,7 @@ let createUser = async(body)=>{
 }
 
 
-
+//Mostrar usuarios
 let allUser = async ()=>{
     try {
         const objUser = await Users

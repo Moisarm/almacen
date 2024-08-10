@@ -3,7 +3,7 @@ extends ../layout/layout
 block content
     if isOk    
         
-        button.btn.btn-success(type='button' data-bs-toggle='modal' data-bs-target='#nuevaUserModal')  Nuevo
+        button.btn.btn-success(type='button' data-bs-toggle='modal' data-bs-target='#nuevoUserModal')  Nuevo Usuario
          
         include modal/nuevoUser
 
@@ -26,9 +26,9 @@ block content
                                         - _id = val
                                     if key == 'ultimo'
                                         td 
-                                            button.btn.btn-success#showActualizar(type='button' data-bs-toggle='modal' data-bs-target='#actualizarModal' onclick="changeIdActualizar('"+ _id +"', '"+nombreTabla+"')" )
-                                                |Actualizar
-                                            include modal/actualizar
+                                          button.btn.btn-success#showActualizar(type='button' data-bs-toggle='modal' data-bs-target='#actualizarUserModal' onclick="changeIdActualizarUser('"+ _id +"', '"+nombreTabla+"')" )
+                                              |Actualizar
+                                          include modal/actualizarUser
                                         td
                                             button.btn.btn-danger(type='submit') 
                                                 |Eliminar
