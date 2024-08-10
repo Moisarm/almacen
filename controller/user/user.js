@@ -154,11 +154,31 @@ let comparePass = async (pass, hash)=>{
 }
 
 
+let userPredeterminado = async ()=>{
+
+    try {
+        createUser({
+            
+    
+                "nombre":"admin ",
+                "apellido":"admin",
+                "userName":"admin",
+                "password":"admin",
+                "role":"ADMIN"
+            
+        })
+    } catch (error) {
+        
+    }
+}
+
+
 module.exports={
     createUser,
     allUser,
     actualizarUser,
     oneUser,
-    comparePass
+    comparePass,
+    userPredeterminado
 
 };
