@@ -1,18 +1,11 @@
 // const JWT = require('jsonwebtoken');
 // const bcrypt= require('bcrypt-nodejs');
+const bcrypt = require('bcrypt');
 // const {JWT_EXPIRES, JWT_SECRET} = require('../../config/envConfig');
-const User = require('../../models/users');
-// const {valUserSchema} = require('../../controller/validacion/valUser');
+const Users = require('../../models/users');
+const {valUserSchema} = require('../../controller/validacion/valUser');
 
 
-let roles = {
-    values: [
-        'ADMIN', 
-        'Almacenista',
-        'Reader'
-    ],
-    message: '{VALUE}, is no a valid role'
-};
 
 let createUser = async(body)=>{
     
@@ -26,10 +19,20 @@ let createUser = async(body)=>{
         return false //DEBES CAMBIAR ESTO POR LO QUE VAS A DEVOLVER SI LA VALIDACION FALLA
         }
        
-    let pass = await bcrypt.hash(password,5)
+    // let pass = await bcrypt.hash(password,5)
+    
+    let pass = await bcrypt.hash(body.password, 10).then(function(hash) {
+            // Store hash in your password DB.
+  
+        // Store hash in your password DB..
 
+        console.log(hash)
+        return hash
+    });
 
-       let user = new User(body);//esta si valido antes
+    console.log(`clave :${body.password} | hash clave: ${pass}`)
+        body.password = pass
+       let user = new Users(body);//esta si valido antes
        
        let respCreateUser = await user.save()
        .then(resp=>{
@@ -88,8 +91,47 @@ let allUser = async ()=>{
     }
 }
 
+
+
+let actualizarUser = async(query, body)=>{
+    try {
+        const updateUsers = await Users.findOneAndUpdate(query, body)
+        .then((ob)=>{
+            console.log(`Actualizar Users :${JSON.stringify(ob)}`)
+
+            return {
+                status: 200,
+                code: 2000,
+                date: new Date(),
+                info: "Users  guardada exitosamente",
+                response:ob
+                }
+        })
+
+        return{
+            code: 4003,
+            date: new Date(),
+            info: "Error al guardar en BD", 
+            response: updateUsers
+        }
+
+    } catch (error) {
+        console.log(error);
+        
+            return{ status: 400,
+                code: 4003,
+                date: new Date(),
+                info: "Error al guardar en BD", 
+                error:er
+                }
+    }
+
+    //response= updateUsers
+}
+
 module.exports={
     createUser,
-    allUser
+    allUser,
+    actualizarUser
 
 };
