@@ -8,7 +8,7 @@ const Producto = require('../models/producto');
 
 const {mostrarProducto, postProducto, actualizarProducto, mostrarProductOne }= require('../controller/productos/productos')
 
-//Escribir
+//Escribir (Agregar)
 router.post('/nuevo',async function(req, res) {
 
     try {
@@ -146,28 +146,30 @@ router.get('/:_id', async function (req, res) {
 })
 
 //Actualizar
-router.put('/Actualizar_Producto', async function (req, res) {
+router.put('/Actualizar/:_id', async function (req, res) {
     try {
-        let updateProducto = await actualizarProducto(req.query, req.body)
-        
+
+        console.log("-----------------Actualizaar--------------------")
+        console.log(req.params)
+        console.log(req.body)
+        let updateProducto = await actualizarProducto({_id:req.params._id}, req.body)
         if(updateProducto){
             res.status(200).json({
-    
-                status:200, 
+                status:200,
                 code:2000,
                 date:new Date(),
-                info:'ok'
+                info:"Webi Wabo"
             })
-    
         }else{
             res.status(400).json({
-    
-                status:400, 
+                status:400,
                 code:4000,
-                date:new Date(),
-                info:'NO OK'
+                date: new Date(),
+                info:"No ok"
             })
-            }
+        }   
+
+        console.log(updateProducto)
 
     } catch (error) {
         console.error(error)

@@ -82,7 +82,7 @@ let mostrarCategoriaONE = async (query)=> {
 
 //Actualizar
 
-let actualizarCat = async()=>{
+let actualizarCategoria = async(query, body)=>{
     try {
         const updateCategoria = await Categoria.findOneAndUpdate(query, body)
         .then((ob)=>{
@@ -115,12 +115,20 @@ let actualizarCat = async()=>{
                 }
     }
 
-    response= updateCategoria
+    //response= updateCategoria
 }
+
+let eliminarCat= async(id)=>{
+    console.log("Se va a e")
+    let deleteCat = await Categoria.findByIdAndDelete(req.params.id)
+    console.log(deleteCat)
+}
+
 
 module.exports= {
     mostrarCategoria, 
     postCategoria, 
-    actualizarCat,
-    mostrarCategoriaONE
+    actualizarCategoria,
+    mostrarCategoriaONE,
+    eliminarCat
 }

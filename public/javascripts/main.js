@@ -1,5 +1,24 @@
 
 /*Codigos que le dan funcionalidad a las pantallas de Productos */
+var idActualizarCategoriaGlobal = ''
+var idActualizarProductoGlobal = ''
+
+
+function changeIdActualizar(id, nombreTabla){
+    console.log(`ESTO ES EL ID NUEVO: ${id} | nombreTabla: ${nombreTabla}`)
+
+    if(nombreTabla==="producto"){
+
+        idActualizarProductoGlobal = id
+
+    }else{
+
+        idActualizarCategoriaGlobal = id
+    }
+}
+
+
+
 
 //Funcion para crear una categoria
 function enviarNuevaCategoria(){
@@ -40,6 +59,8 @@ function enviarNuevaCategoria(){
 
 
 //Funcion para crear un producto
+
+/*Funcion para Crear Producto */
 async function enviarNuevaProducto(e){
  //dinamico, debe detectar si es producot o catProduc
 
@@ -91,18 +112,25 @@ console.log(enviarNuevaProducto)
 }
 
 
-//Muestra la Categoria actual en el Modulo Actualizar
-async function catactua(id){
+//Actualiza la Categoria
+async function idCategoriaActualizar(){
 
 
-    console.log(`catactua`)
-    console.log(`eL ID ES: ${id}`)
+    console.log(`id global: ${idActualizarCategoriaGlobal}`)
+    console.log("Actualizar Producto")
+    let categoria_nombre= document.getElementById('nombre_cat_actualizar').value
+    console.log(`esto es actualizar`)
+    console.log(`esto es actualizar3`)
+    console.log(`esto es actualizar2`)
+    //console.log(`eL ID ES: ${id}`)
 
-    ////CONSUMIR API
-    await fetch(`http://localhost:3000/Categoria/${id}`,
+  
+
+    // FETCH QUE LLAME A LA API PARA ACTUALIZAR
+    fetch('http://localhost:3000/categoria/actualizar/'+idActualizarCategoriaGlobal,
         // fetch para enviar el dato
    {
-       method:"GET",
+       method:"PUT",
        headers:{
            'Content-Type':'application/json', 
            accept: 'application/json',
@@ -111,28 +139,72 @@ async function catactua(id){
            "Access-Control-Allow-Origin": "*",
            "Access-Control-Allow-Methods": "POST, GET, PUT",
            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-       }
-      
+       },
+       body:JSON.stringify( {categoria_nombre}) //Aquí se envía
    })
-   .then(res => res.json())
+   .then(res => {res.json()
+    location.reload();
+   })
    .then(data => {
-    
-
     console.log(data)
+    console.log("Se está enviando la api")
+    location.reload();
+
+})
+    //.catch(er=> alert) // aquí lo muestro en la consola
+}
+
+async function idProductoActualizar(){
 
 
-     /// COLOCAR DATOS EN EL FORMULARIO
-     document.getElementById("labelNombreCat").innerHTML = "anteriormente: "+data.response.codigo;
+    console.log(`id global: ${idActualizarProductoGlobal}`)
+    console.log("Actualizar Producto")
 
-    console.log()
+    let nombre = document.getElementById('productoNombre').value
+    let codigo = document.getElementById('codigoProducto').value
+    let precio = document.getElementById('precioProducto').value
+    let stock = document.getElementById('stockProducto').value
+    let idCategoria = document.getElementById('idCategoria').value
+    
+    console.log(`***********************`)
+    console.log({nombre, codigo, precio, stock, idCategoria})
+    console.log(`***********************`)
+    
+    console.log(`esto es actualizar`)
+    console.log(`esto es actualizar3`)
+    console.log(`esto es actualizar2`)
+    //console.log(`eL ID ES: ${id}`)
 
+  
 
+    // FETCH QUE LLAME A LA API PARA ACTUALIZAR
+    
+    fetch('http://localhost:3000/producto/actualizar/'+idActualizarProductoGlobal,
+        // fetch para enviar el dato
+   {
+       method:"PUT",
+       headers:{
+           'Content-Type':'application/json', 
+           accept: 'application/json',
+           'User-agent': 'learning app',
 
- })
-   
-   // var boton = document.querySelector('#showActualizar') //Obtengo el valor del input nombre
+           "Access-Control-Allow-Origin": "*",
+           "Access-Control-Allow-Methods": "POST, GET, PUT",
+           "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+       },
+       body:JSON.stringify( {nombre, codigo, precio, stock, idCategoria}) //Aquí se envía
+   })
+   .then(res => {res.json()
+    location.reload();
+   })
+   .then(data => {
+    console.log(data)
+    console.log("Se está enviando la api")
+    location.reload();
 
-   // console.log(boton.dataset.info)
+})
+ 
+    //.catch(er=> alert) // aquí lo muestro en la consola
 }
 
 
@@ -159,6 +231,7 @@ async function productoActual(Id) {
         console.log(data)
     })   
 }
+
 
 //Función Para actualizar categorias
 async function actualizarCategoria(){
@@ -188,10 +261,20 @@ async function actualizarCategoria(){
     .then(res => res.json())
     .then(data => {
      console.log(data)
-     location.reload();})
+     location.reload();
+    
+    })
      //.catch(er=> alert) // aquí lo muestro en la consola
 }
 
 // enviarNuevaProducto.addEventListener('click', async function(e){
    
 // })
+
+//Elimina Categoria
+/*async function deleteCat(params) {
+    console.log("--------------------------Elimar Categoria--------------------")
+    console.log(`id global: ${idActualizarCategoriaGlobal}`)
+    let borrarCat = document.getElementById('nombre_cat_actualizar').
+}*/
+
