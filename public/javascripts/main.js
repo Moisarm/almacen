@@ -59,9 +59,12 @@ async function acceder(){
 
     /// CAPTURAR EL USER Y PASSW
 
-    let userName = document.getElementById('usuario').value
+    let username = document.getElementById('usuario').value
     let password = document.getElementById('clave').value
 
+    console.log(`***********************`)
+    console.log({username, password})
+    console.log(`***********************`)
 
     fetch('http://localhost:3000/login/',
         // fetch para enviar el dato
@@ -77,7 +80,7 @@ async function acceder(){
            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
        },
        body:JSON.stringify( {    
-        userName,
+        username,
         password
     }) //Aquí se envía
     })
@@ -116,4 +119,8 @@ async function accedercategoria(){
 async function accederProducto(){
 
     window.location.assign("/tablas/producto/?token="+window.sessionStorage.getItem("token"))
+}
+async function cerrarSesion(){
+    
+    window.sessionStorage.clear()
 }
