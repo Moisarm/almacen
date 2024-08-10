@@ -5,7 +5,8 @@ const createError = require('http-errors');
 const mongoose= require('mongoose');
 const Producto = require('../models/producto');
 const { mostrarCategoria } = require('../controller/categoria/categoria');
-const {mostrarProducto}=require('../controller/productos/productos')
+const {mostrarProducto}=require('../controller/productos/productos');
+const { verifyToken } = require('../controller/Login/login');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -15,14 +16,14 @@ router.get('/', function(req, res, next) {
 });
 
 /*Ruta de tablas Tablas */
-router.get('/tablas/:nombreTabla/', async function (req, res, next) {
+router.get('/tablas/:nombreTabla/',verifyToken, async function (req, res, next) {
 
   try {
     console.log(`#Params: ${JSON.stringify(req.params)}`)
     console.log(`#query: ${JSON.stringify(req.query)}`)  ///// ?key=value&key2=vaule2
     //console.log(req.query)
     console.log(`#Body: ${JSON.stringify(req.body)}`)// METODOS : POST Y PUT
-
+    console.log(`req otken :${req.tokenUser}`)
     let render
 
     /*Switch para identificar tabla*/

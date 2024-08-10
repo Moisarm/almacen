@@ -50,8 +50,11 @@ let login = async (username,password )=>{
 
 let verifyToken = async (req, res, next) =>{
 
-    const header = req.header("Authorization") || "";
-    const token = header.split(" ")[1];
+    // const header = req.header("Authorization") || "";
+    // const token = header.split(" ")[1];
+    const token = req.query.token;
+    console.log(req)
+    console.log(token)
     if (!token) {
       return res.status(401).json({ message: "Token not provied" });
     }
@@ -59,6 +62,7 @@ let verifyToken = async (req, res, next) =>{
       const payload = jwt.verify(token, ENV.JWT_SECRET);
       console.log(payload)
       req.username = payload.username;
+      req.tokenUser = token
       next();
     } catch (error) {
       return res.status(403).json({ message: "Token not valid" });

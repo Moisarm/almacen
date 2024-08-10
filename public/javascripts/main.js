@@ -53,3 +53,52 @@ async function productoActual(Id) {
     let borrarCat = document.getElementById('nombre_cat_actualizar').
 }*/
 
+
+
+async function acceder(){
+
+
+    fetch('http://localhost:3000/login/',
+        // fetch para enviar el dato
+    {
+       method:"POST",
+       headers:{
+           'Content-Type':'application/json', 
+           accept: 'application/json',
+           'User-agent': 'learning app',
+    
+           "Access-Control-Allow-Origin": "*",
+           "Access-Control-Allow-Methods": "POST, GET, PUT",
+           "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+       },
+       body:JSON.stringify( {    
+        "username":"beto",
+        "password":"123459"
+    }) //Aquí se envía
+    })
+    .then(res => res.json())
+    .then(data => {
+    console.log(data)
+
+    window.sessionStorage.setItem(`token`, data.response.token)
+    })
+
+
+
+
+
+}
+
+
+async function accederProducto(){
+
+    window.location.assign("/tablas/producto/?token="+window.sessionStorage.getItem("token"))
+}
+async function accedercategoria(){
+
+    window.location.assign("/tablas/tipo-producto/?token="+window.sessionStorage.getItem("token"))
+}
+async function accederProducto(){
+
+    window.location.assign("/tablas/producto/?token="+window.sessionStorage.getItem("token"))
+}
