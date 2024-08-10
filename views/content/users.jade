@@ -1,28 +1,31 @@
 extends ../layout/layout
 
 block content
+  if isOk  
 
-    table.table.table-dark
-      thead
-        tr
-          th(scope='col') #
-          th(scope='col') First
-          th(scope='col') Last
-          th(scope='col') Handle
-      tbody
-        tr
-          th(scope='row') 1
-          td Mark
-          td Otto
-          td @mdo
-        tr
-          th(scope='row') 2
-          td Jacob
-          td Thornton
-          td @fat
-        tr
-          th(scope='row') 3
-          td Larry
-          td the Bird
-          td @twitter
-    
+    button.btn.btn-success(type='button' data-bs-toggle='modal' data-bs-target='#nuevoUserModal')  Nuevo Usuario
+
+    include modal/nuevoUser
+        .row
+            .col12
+               table.table.table-bordered.border-primary 
+                    //table.table.table-dark
+                    thead
+                      tr
+                        each item in tHead
+                          th= item
+                         
+                    tbody#tbody
+                      each item in tBody  
+                        tr
+                          - let _id = ''
+                              each val, key in item
+                                  if key == "_id"
+                                    - _id = val
+                                  if key == 'ultimo'
+                                            
+                                  td
+                                    button.btn.btn-danger(type='submit') Eliminar
+                                     
+                                  else   
+                                    td=val 
