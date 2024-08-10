@@ -43,7 +43,12 @@ router.get('/',async function(req, res){
       
       }
 
+      console.log(`****`)
+      console.log(render)
+
       res.render('content/users', render);
+    // res.render('content/leerTabla', render);
+
 
     
 

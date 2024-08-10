@@ -66,7 +66,7 @@ let allUser = async ()=>{
         const objUser = await Users
         .find()
         .lean()
-        .select('nombre apellido userName  password role')
+        .select('nombre apellido userName  role')
         
         .then(resultadouser=>{
           console.log(`-----------------`)

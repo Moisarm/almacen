@@ -6,29 +6,29 @@ block content
     button.btn.btn-success(type='button' data-bs-toggle='modal' data-bs-target='#nuevoUserModal')  Nuevo Usuario
 
     include modal/nuevoUser
-      .row
-        .col12
-          table.table.table-bordered.border-primary 
-              //table.table.table-dark
-            thead
+    .row
+      .col12
+        table.table.table-bordered.border-primary 
+            //table.table.table-dark
+          thead
+            tr
+              each item in tHead
+                th= item
+                
+          tbody#tbody
+            each item in tBody
               tr
-                each item in tHead
-                  th= item
-                  
-            tbody#tbody
-              each item in tBody  
-                tr
-                  - let _id = ''
-                      each val, key in item
-                          if key == "_id"
-                            - _id = val
-                          if key == 'ultimo'
-                                    
-                            td
-                              button.btn.btn-danger(type='submit') Eliminar
-                                
-                            else   
-                              td=val 
+                - let _id = ''
+                each val, key in item
+                  if key == "_id"
+                    - _id = val
+                  if key == 'ultimo'
+
+                    td
+                      button.btn.btn-danger(type='submit') Eliminar
+
+                  else
+                    td=val
   else 
         script.
             alert("Tabla no Encontrada")
