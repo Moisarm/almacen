@@ -1,5 +1,5 @@
-const User = require('../../models/user')
-const {valUsuarioSchema}= require('../validacion/valUser')
+// const User = require('../../models/user')
+// const {valUsuarioSchema}= require('../validacion/valUser')
 
 
 //Escribir
