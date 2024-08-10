@@ -68,17 +68,10 @@ let allUser = async ()=>{
         .lean()
         .select('nombre apellido userName  password role')
         
-        .then(resultadoProducto=>{
+        .then(resultadouser=>{
           console.log(`-----------------`)
           
-          // console.log(ob)
-  
-          resultadoProducto.map(obj=>{
-  
-              obj.idCategoria = obj.idCategoria.categoria_nombre
-          })
-  
-          return resultadoProducto
+          return resultadouser
         })
       //   console.log(producto)
   
