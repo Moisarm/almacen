@@ -1,0 +1,34 @@
+#nuevaCatModal.modal.fade(tabindex='-1' aria-labelledby='nuevoUserLabel' aria-hidden='true')
+    .modal-dialog
+      .modal-content
+        .modal-header
+            
+            h1#nuevoUserLabel.modal-title.fs-5 #{nombreTabla}
+
+            button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+        .modal-body
+        
+            form 
+                label(for="nombreUser") Nombre 
+                input#p.form-control(type='text' aria-describedby='passwordHelpInline' placeholder="Nombre" name= 'nombreUser'  ) 
+                
+                label(for="apellido") Apellido
+                input#codigo.form-control(type='text' aria-describedby='passwordHelpInline' placeholder="Apellido"  name="apellido") 
+                
+                label(for="username") Username
+                input#precio.form-control(type='text' aria-describedby='passwordHelpInline' placeholder="Username" name="username")
+            
+                
+                label(for="role") Rol 
+
+                //Select que muestre de manera dinamica el nombre de la categoria
+                select#irole.form-select(name='role')
+                    each item in users
+                        each val, key in item
+                            option(value=key) #{val}
+        
+        .modal-footer
+            button.btn.btn-secondary(type='button' data-bs-dismiss='modal') Close
+           
+                button.btn.btn-primary#enviarNuevaProducto(type='button',onclick="createUser()") Save changes
+          

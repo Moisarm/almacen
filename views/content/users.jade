@@ -1,35 +1,58 @@
 extends ../layout/layout
 
 block content
-  if isOk  
+    if isOk    
+        
+        button.btn.btn-success(type='button' data-bs-toggle='modal' data-bs-target='#nuevaUserModal')  Nuevo
+         
+        include modal/nuevoUser
 
-    button.btn.btn-success(type='button' data-bs-toggle='modal' data-bs-target='#nuevoUserModal')  Nuevo Usuario
+        //bootstrap tabla
+        .row
+            .col12
+               table.table.table-bordered.border-primary 
+                    //table.table.table-dark
+                    thead
+                        tr
+                            each item in tHead
+                                th= item
+                         
+                    tbody#tbody
+                        each item in tBody  
+                            tr
+                                - let _id = ''
+                                each val, key in item
+                                    if key == "_id"
+                                        - _id = val
+                                    if key == 'ultimo'
+                                        td 
+                                            button.btn.btn-success#showActualizar(type='button' data-bs-toggle='modal' data-bs-target='#actualizarModal' onclick="changeIdActualizar('"+ _id +"', '"+nombreTabla+"')" )
+                                                |Actualizar
+                                            include modal/actualizar
+                                        td
+                                            button.btn.btn-danger(type='submit') 
+                                                |Eliminar
+                                            
+                                    else   
+                                        td=val 
 
-    include modal/nuevoUser
-      .row
-        .col12
-          table.table.table-bordered.border-primary 
-              //table.table.table-dark
-            thead
-              tr
-                each item in tHead
-                  th= item
-                  
-            tbody#tbody
-              each item in tBody  
-                tr
-                  - let _id = ''
-                      each val, key in item
-                          if key == "_id"
-                            - _id = val
-                          if key == 'ultimo'
-                                    
-                            td
-                              button.btn.btn-danger(type='submit') Eliminar
+
+        // boots de paginacion                            
+        nav(aria-label='Page navigation example')
+            ul.pagination.justify-content-end
+                li.page-item.disabled
+                    a.page-link(href='#' tabindex='-1') Previous
+                li.page-item
+                    a.page-link(href='#') 1
+                li.page-item
+                    a.page-link(href='#') 2
+                li.page-item
+                    a.page-link(href='#') 3
+                li.page-item
+                    a.page-link(href='#') Next
+
                                 
-                            else   
-                              td=val 
-  else 
+    else 
         script.
             alert("Tabla no Encontrada")
             window.location.href='http://localhost:3000/';
