@@ -15,15 +15,16 @@ const bodyParser = require("body-parser");
 
 
 /*Declaración de las rutas*/
+// const LoginRouter = require('./routes/Login');
 const LoginRouter = require('./routes/Login');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const productoRouter = require('./routes/producto');
 const categoriaRouter= require('./routes/categoria');
 const historialRouter= require('./routes/historial');
+
+
 const { default: mongoose } = require('mongoose');
-
-
 /*Conexión a Base de Datos*/
 const ENV = require("./config/envConfig")
 
@@ -102,6 +103,7 @@ app.use('/users', usersRouter);
 app.use('/producto', productoRouter);
 app.use('/categoria', categoriaRouter);
 app.use('/historial',historialRouter);
+app.use('/login', LoginRouter);
 //app.use('/tablas', usersRouter);
 
 /*Recibir datos de formulario*/

@@ -66,7 +66,7 @@ let allUser = async ()=>{
         const objUser = await Users
         .find()
         .lean()
-        .select('nombre apellido userName  password role')
+        .select('nombre apellido userName  role')
         
         .then(resultadouser=>{
           console.log(`-----------------`)
@@ -122,9 +122,43 @@ let actualizarUser = async(query, body)=>{
     //response= updateUsers
 }
 
+let oneUser = async (query)=>{
+    try {
+        const objUser = await Users
+        .find(query)
+        .lean()
+        .select('userName  role password')
+        
+        .then(resultadouser=>{
+          console.log(`-----------------`)
+          
+          return resultadouser
+        })
+      //   console.log(producto)
+  
+        return objUser
+
+
+    } catch (error) {
+        console.error(`Error: oneUser`)
+        console.error(error)
+    }
+}
+
+
+let comparePass = async (pass, hash)=>{
+    return await bcrypt.compare(pass, hash).then(function(result) {
+        // result == true
+        return result
+    });
+}
+
+
 module.exports={
     createUser,
     allUser,
-    actualizarUser
+    actualizarUser,
+    oneUser,
+    comparePass
 
 };
