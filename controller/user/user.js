@@ -1,8 +1,8 @@
-const JWT = require('jsonwebtoken');
-const bcrypt= require('bcrypt-nodejs');
-const {JWT_EXPIRES, JWT_SECRET} = require('../../config/envConfig');
-const User= require('../../models/user');
-const {valUserSchema} = require('../../controller/validacion/valUser');
+// const JWT = require('jsonwebtoken');
+// const bcrypt= require('bcrypt-nodejs');
+// const {JWT_EXPIRES, JWT_SECRET} = require('../../config/envConfig');
+const User = require('../../models/users');
+// const {valUserSchema} = require('../../controller/validacion/valUser');
 
 
 let roles = {
@@ -57,4 +57,39 @@ let createUser = async(body)=>{
 }
 
 
-module.exports={createUser};
+
+let allUser = async ()=>{
+    try {
+        const objUser = await Users
+        .find()
+        .lean()
+        .select('nombre apellido userName  password role')
+        
+        .then(resultadoProducto=>{
+          console.log(`-----------------`)
+          
+          // console.log(ob)
+  
+          resultadoProducto.map(obj=>{
+  
+              obj.idCategoria = obj.idCategoria.categoria_nombre
+          })
+  
+          return resultadoProducto
+        })
+      //   console.log(producto)
+  
+        return objUser
+
+
+    } catch (error) {
+        console.error(`Error: allUser`)
+        console.error(error)
+    }
+}
+
+module.exports={
+    createUser,
+    allUser
+
+};

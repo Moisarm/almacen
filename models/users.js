@@ -3,6 +3,16 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+
+let rolesValidos = {
+    values: [
+        'ADMIN', 
+        'Almacenista',
+        'Reader'
+    ],
+    message: '{VALUE}, is no a valid role'
+};
+
 const userSchema= new Schema({
     nombre: {
         type: String,
@@ -33,4 +43,5 @@ const userSchema= new Schema({
     },
 })
 
-module.exports={ userSchema};
+
+module.exports = mongoose.model('User', userSchema);
