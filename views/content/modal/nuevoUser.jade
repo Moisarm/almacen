@@ -10,7 +10,7 @@
         
             form 
                 label(for="nombreUser") Nombre 
-                input#p.form-control(type='text' aria-describedby='passwordHelpInline' placeholder="Nombre" name= 'nombreUser'  ) 
+                input#nombreUser.form-control(type='text' aria-describedby='passwordHelpInline' placeholder="Nombre" name= 'nombreUser'  ) 
                 
                 label(for="apellido") Apellido
                 input#apellido.form-control(type='text' aria-describedby='passwordHelpInline' placeholder="Apellido"  name="apellido") 
@@ -24,7 +24,7 @@
                 
                 label(for="role") Rol 
                 //Select que muestre de manera dinamica el nombre de la categoria
-                select#irole.form-select(name='role')
+                select#role.form-select(name='role')
                     option(value="ADMIN") ADMIN
                     option(value="Almacenista") Almacenista
                     option(value="Reader") Reader

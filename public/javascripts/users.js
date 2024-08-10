@@ -3,24 +3,26 @@
 var idActualizarUsuarioGlobal = ''
 
             //Este aca nombre de boton
-function changeIdActualizarUser(id, nombreTabla){
-    console.log(`ESTO ES EL ID NUEVO: ${id} | nombreTabla: ${nombreTabla}`)
+function changeIdActualizarUser(id){
+    console.log(`ESTO ES EL ID NUEVO: ${id} `)
 
     idActualizarUsuarioGlobal = id
     
 }
-async function changeIdActualizarUser(){
+
+//Actualizar
+async function ActualizarUsuario(){
 
 
-    console.log(`id global: ${changeIdActualizarUser}`)
+    console.log(`id global: ${idActualizarUsuarioGlobal}`)
     console.log("Actualizar Producto")
 
-    let nombre = document.getElementById('nombreUser').value
-    let apellido = document.getElementById('apellido').value
-    let rolesValidos = document.getElementById('role').value
+    let nombre = document.getElementById('nombreUserUpdate').value
+    let apellido = document.getElementById('apellidoUpdate').value
+    let role = document.getElementById('roleUpdate').value
     
     console.log(`***********************`)
-    console.log({nombre, apellido, rolesValidos})
+    console.log({nombre, apellido, role})
     console.log(`***********************`)
     
     console.log(`esto es actualizar`)
@@ -32,7 +34,7 @@ async function changeIdActualizarUser(){
 
     // FETCH QUE LLAME A LA API PARA ACTUALIZAR
     
-    fetch('http://localhost:3000/producto/actualizar/'+changeIdActualizarUser,
+    fetch('http://localhost:3000/users/actualizar/'+idActualizarUsuarioGlobal,
         // fetch para enviar el dato
    {
        method:"PUT",
@@ -45,7 +47,7 @@ async function changeIdActualizarUser(){
            "Access-Control-Allow-Methods": "POST, GET, PUT",
            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
        },
-       body:JSON.stringify( {nombre, apellido, rolesValidos}) //Aquí se envía
+       body:JSON.stringify( {nombre, apellido, role}) //Aquí se envía
    })
    .then(res => {res.json()
     location.reload();
@@ -65,11 +67,17 @@ async function changeIdActualizarUser(){
 
 
 async function nuevoUser(){
-    let nombre = document.getElementById('producto').value //Obtengo el valor del input nombre
-    let codigo = document.getElementById('codigo').value //Obtengo el valor del input nombre
-    let precio = document.getElementById('precio').value //Obtengo el valor del input nombre
-    let stock = document.getElementById('stock').value //Obtengo el valor del input nombre
-    let idCategoria = document.getElementById('idCategoria').value //Obtengo el valor del input nombre
+    let nombre = document.getElementById('nombreUser').value
+    let apellido = document.getElementById('apellidoU').value
+    let role = document.getElementById('role').value
+    let userName = document.getElementById('username')
+    let password= document.getElementById('password')
+  
+  
+    console.log(`***********************`)
+    console.log({nombre, apellido, role})
+    console.log(`***********************`)
+    
    
    
    
