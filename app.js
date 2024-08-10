@@ -26,7 +26,8 @@ const historialRouter= require('./routes/historial');
 
 const { default: mongoose } = require('mongoose');
 /*Conexión a Base de Datos*/
-const ENV = require("./config/envConfig")
+const ENV = require("./config/envConfig");
+const { userPredeterminado } = require('./controller/user/user');
 
 mongoose.connect(ENV.MONGODB , {
     // mongoose.set('useFindAndModify', false);
@@ -41,7 +42,11 @@ mongoose.connect(ENV.MONGODB , {
             Host:${db.connections[0].host}
             Port:${db.connections[0].port}
             User:${db.connections[0].user}`
+
+            
         )
+        userPredeterminado()
+
         // console.info(`DB is conected on: 
         //     Name:${db.connections[0].name}
         //     Host:${db.connections[0].host}
@@ -108,6 +113,7 @@ app.use('/login', LoginRouter);
 
 /*Recibir datos de formulario*/
 //app.put('Actualizar:nombreTabla', (req, res)=>{})
+
 
 
 // catch 404 and forward to error handler
