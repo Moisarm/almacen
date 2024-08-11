@@ -111,7 +111,7 @@ async function createUser(){
 }
 
 
-async function eliminarUser(){
+async function actualizarUser(){
     console.log(`id global: ${idActualizarUsuarioGlobal}`)
     console.log("Actualizar Producto")
 

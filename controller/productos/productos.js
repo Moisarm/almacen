@@ -46,12 +46,13 @@ let postProducto = async (body)=>{
 }
 
 
-let mostrarProducto = async ()=> {
+let mostrarProducto = async (select = 'nombre precio codigo  stock', sort= {_id:-1})=> {
     try {
       const objProducto = await Producto
       .find()
       .lean()
-      .select('nombre precio codigo  stock')
+      .sort(sort)
+      .select(select)
       .populate({ path: 'idCategoria', select: 'categoria_nombre' })
       
       .then(resultadoProducto=>{

@@ -29,7 +29,9 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.5.2",
     "mongoose-unique-validator": "^5.0.1",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "pdfkit": "^0.15.0",
+    "pdfkit-table": "^0.1.99"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"

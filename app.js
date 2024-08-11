@@ -7,7 +7,10 @@ const logger = require('morgan');
 const mod_fs = require('fs');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
-
+const fs = require('fs');
+const PDFDocument = require('pdfkit');
+const pdfkitTable = require('pdfkit-table');
+// const PDFDocument = require('pdfkit');
 const bodyParser = require("body-parser"); 
 
 
@@ -22,6 +25,7 @@ const usersRouter = require('./routes/users');
 const productoRouter = require('./routes/producto');
 const categoriaRouter= require('./routes/categoria');
 const historialRouter= require('./routes/historial');
+const pdfRouter = require('./routes/pdf');
 
 
 const { default: mongoose } = require('mongoose');
@@ -109,6 +113,7 @@ app.use('/producto', productoRouter);
 app.use('/categoria', categoriaRouter);
 app.use('/historial',historialRouter);
 app.use('/login', LoginRouter);
+app.use('/pdf', pdfRouter);
 //app.use('/tablas', usersRouter);
 
 /*Recibir datos de formulario*/

@@ -68,7 +68,7 @@ router.get('/tablas/:nombreTabla/',verifyToken, async function (req, res, next) 
           title: 'TABLA DE MOI' , 
           nombreTabla:"producto",
 
-          username:"Moises",
+          username:"user",
           tHead:Head,
           tBody:resProducto,
 

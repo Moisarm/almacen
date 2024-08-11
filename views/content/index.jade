@@ -3,10 +3,26 @@ extends ../layout/layout
 block content
   
   h1.bienvenida Bienvenido al alamacen de tu confianza
-  button.btn.btn-success(type='button'   onclick="acceder()" )
+ 
   
 
-
+.row
+  .col12
+      table.table.table-bordered.border-primary 
+          //table.table.table-dark
+          thead
+              tr
+                  each item in tHead
+                      th= item
+           
+          tbody#tbody
+              each item in tBody  
+                  tr
+                      - let _id = ''
+                      each val, key in item
+                          if key == "_id"
+                              - _id = val
+                          if key == 'ultimo'
 
 
    
