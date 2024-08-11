@@ -32,12 +32,22 @@ router.get('/tablas/:nombreTabla/',verifyToken, async function (req, res, next) 
     console.log(`req otken :${req.tokenUser}`)
     let render
 
+    const Query    = req.query
+    console.log(Query)
+    const Page  = parseInt(Query.page, 10) || 0
+    const Limit = parseInt(Query.limit, 10) || 10
+
+    let optionsPage ={
+        page:Page,
+        limit:Limit
+    }
+
     /*Switch para identificar tabla*/
     switch (req.params.nombreTabla) {
 
       case "producto":
         //llama a la función del controller
-        let resProducto = await mostrarProducto()
+        let resProducto = await mostrarProducto({},optionsPage )
         let resCategoria = await mostrarCategoria()
 
         let mapCat = resCategoria.map(obj=>{
@@ -47,19 +57,20 @@ router.get('/tablas/:nombreTabla/',verifyToken, async function (req, res, next) 
           }
         })
 
-       
+
+        let productosData = resProducto.data
         console.log(resProducto.length)
         console.log(resProducto)
 
         let Head=[]//le cambiaste el nombre!!!! 
 
-        for (const key in resProducto[0]){
+        for (const key in productosData[0]){
           Head.push(key)
         } 
 
-        for (let i = 0; i < resProducto.length; i++) {
-          resProducto[i].ultimo = true,
-          delete resProducto[i].__v
+        for (let i = 0; i < productosData.length; i++) {
+          productosData[i].ultimo = true,
+          delete productosData[i].__v
         }
         
         render = { 
@@ -70,9 +81,12 @@ router.get('/tablas/:nombreTabla/',verifyToken, async function (req, res, next) 
 
           username:"user",
           tHead:Head,
-          tBody:resProducto,
+          tBody:productosData,
 
           categoria: mapCat,
+          objects: resProducto.objects,
+          pages:resProducto.pages,
+          current:resProducto.current
 
 
         

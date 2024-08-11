@@ -17,15 +17,13 @@ const HistorialSchema = new Schema({
         type:Schema.Types.ObjectId,
         ref:user,
         required:true
-    },    
+    },
 
     cantidad:{type:Number},
     estado:{type:String},
     fecha:{type:Date},
-    foto:{type:String, default:null},
+    // foto:{type:String, default:null},
 
-    // time_Start:{type:Date, required:true},
-    // time_End:{type:Date, required:false, default:null},
 
     isDelete:{type:Boolean, default:false}/// para identificar si el usuario elimino el registro, sin ser eliminado. 
 
@@ -33,6 +31,6 @@ const HistorialSchema = new Schema({
 	},{
         timestamps: true}
     )
-    
+
     //Exporta el modelo
     module.exports = mongoose.model('Historial',HistorialSchema)
