@@ -78,7 +78,7 @@ let mostrarProducto = async (query={}, optionsPage, sort= {_id:-1} ,select = 'no
             let response = {
                 objects: count,//cantidad total
                 pages: Math.round(count/optionsPage.limit), //cantidad de paginas, es la division de objetos totales entre el limite
-                current: optionsPage.page+1, //pagina actual
+                current: optionsPage.page, //pagina actual
                 data:resultadoProducto// registros encontrados
 
             }

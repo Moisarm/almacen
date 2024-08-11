@@ -1,7 +1,8 @@
 extends ../layout/layout
 
 block content
-    .usr
+    .usr            0 1       2-1
+    p  #{objects} #{pages} #{current}  asdasd
     if isOk    
         //-p LA TABLA A MOSTRAR ES : #{nombreTabla}
 
@@ -58,16 +59,15 @@ block content
         // boots de paginacion                            
         nav(aria-label='Page navigation example')
             ul.pagination.justify-content-end
-                li.page-item.disabled
-                    a.page-link(href='#' tabindex='-1') Previous
-                li.page-item
-                    a.page-link(href='#') 1
-                li.page-item
-                    a.page-link(href='#') 2
-                li.page-item
-                    a.page-link(href='#') 3
-                li.page-item
-                    a.page-link(href='#') Next
+                - var n = 0;
+                while n < pages+1
+                    li.page-item
+                        if nombreTabla ==='producto'
+                            a.page-link( onclick="accederProducto('"+n+"')")  #{n+1}
+                        else    
+                            a.page-link( onclick="accedercategoria('"+n+"')")  #{n+1}
+                    - n++
+
 
                                 
     else 

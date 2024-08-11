@@ -109,17 +109,17 @@ async function acceder(){
 
 
 
-async function accederProducto(){
+async function accederProducto(page=0){
 
-    window.location.assign("/tablas/producto/?token="+window.sessionStorage.getItem("token"))
+    window.location.assign(`/tablas/producto/?page=${page}&token=`+window.sessionStorage.getItem("token"))
 }
 async function accederDashboard(){
 
     window.location.assign("/dashboard/?token="+window.sessionStorage.getItem("token"))
 }
-async function accedercategoria(){
+async function accedercategoria(page=0){
 
-    window.location.assign("/tablas/tipo-producto/?token="+window.sessionStorage.getItem("token"))
+    window.location.assign(`/tablas/tipo-producto/?page=${page}&token=`+window.sessionStorage.getItem("token"))
 }
 async function accederusuario(){
 

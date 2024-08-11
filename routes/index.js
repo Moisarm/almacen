@@ -35,7 +35,7 @@ router.get('/tablas/:nombreTabla/',verifyToken, async function (req, res, next) 
     const Query    = req.query
     console.log(Query)
     const Page  = parseInt(Query.page, 10) || 0
-    const Limit = parseInt(Query.limit, 10) || 10
+    const Limit = parseInt(Query.limit, 10) || 5
 
     let optionsPage ={
         page:Page,
@@ -85,7 +85,7 @@ router.get('/tablas/:nombreTabla/',verifyToken, async function (req, res, next) 
 
           categoria: mapCat,
           objects: resProducto.objects,
-          pages:resProducto.pages,
+        pages:resProducto.pages,
           current:resProducto.current
 
 
