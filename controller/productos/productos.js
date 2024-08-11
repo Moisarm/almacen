@@ -46,18 +46,20 @@ let postProducto = async (body)=>{
 }
 
 
-let mostrarProducto = async (select = 'nombre precio codigo  stock', sort= {_id:-1})=> {
+let mostrarProducto = async (query={}, optionsPage, sort= {_id:-1} ,select = 'nombre precio codigo  stock', )=> {
     try {
       const objProducto = await Producto
-      .find()
+      .find(query)
       .lean()
       .sort(sort)
       .select(select)
+      .skip(optionsPage.page * optionsPage.limit)
+      .limit(optionsPage.limit)
       .populate({ path: 'idCategoria', select: 'categoria_nombre' })
       
-      .then(resultadoProducto=>{
+      .then(async (resultadoProducto)=>{
         console.log(`-----------------`)
-        
+
         // console.log(ob)
 
         resultadoProducto.map(obj=>{
@@ -65,12 +67,32 @@ let mostrarProducto = async (select = 'nombre precio codigo  stock', sort= {_id:
             obj.idCategoria = obj.idCategoria.categoria_nombre
         })
 
-        return resultadoProducto
+
+            const count = await 
+            Producto //clase del modelo. 
+            .find(query)// busqueda, el query debe ser un JSON.
+            .lean()// simplifica el obj retornado, (se utiliza en base de datos GRANDES)
+            .countDocuments({})//cuenta la cantidad de objetos traidos en la busqueda. (total, sin paginacion.)
+            .sort({_id:-1}) //ordena la busqueda, de la mas nueva a la vieja.0
+
+            let response = {
+                objects: count,//cantidad total
+                pages: Math.round(count/optionsPage.limit), //cantidad de paginas, es la division de objetos totales entre el limite
+                current: optionsPage.page+1, //pagina actual
+                data:resultadoProducto// registros encontrados
+
+            }
+
+
+        return response
       })
     //   console.log(producto)
 
       return objProducto
     } catch (error) {
+
+        console.error(error)
+        console.log(`Error mostrar producto`)
         
     }
 }
