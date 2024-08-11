@@ -17,6 +17,12 @@
     padding: 0;
 }    
 
+*a{
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+}
+
 .cabeza{
     background-color: rgb(62, 15, 109);
 }

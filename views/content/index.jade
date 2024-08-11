@@ -2,27 +2,38 @@ extends ../layout/layout
 
 block content
   
-  h1.bienvenida Bienvenido al alamacen de tu confianza
- 
-  
+    h1.bienvenida Bienvenido al alamacen de tu confianza
 
-.row
-  .col12
-      table.table.table-bordered.border-primary 
-          //table.table.table-dark
-          thead
-              tr
-                  each item in tHead
-                      th= item
-           
-          tbody#tbody
-              each item in tBody  
-                  tr
-                      - let _id = ''
-                      each val, key in item
-                          if key == "_id"
-                              - _id = val
-                          if key == 'ultimo'
+    select#idCategoria.form-select(name='idCategoria')
+   
+        option(value=1) 1
+        option(value=1) 1
+        option(value=1) 1doritp
+        option(value=1) 1
+    
+    input(type="text")
+
+    button.btn.btn-primary#actualizarCategoria(type='button' onclick="idCategoriaActualizar()") sumar
+    button.btn.btn-danger#actualizarCategoria(type='button' onclick="idCategoriaActualizar()") restar
+
+ 
+    //.row
+        .col12
+            table.table.table-bordered.border-primary 
+                //table.table.table-dark
+                thead
+                    tr
+                        each item in tHead
+                            th= item
+                
+                tbody#tbody
+                    each item in tBody  
+                        tr
+                            - let _id = ''
+                            each val, key in item
+                                if key == "_id"
+                                    - _id = val
+                                if key == 'ultimo'
 
 
    

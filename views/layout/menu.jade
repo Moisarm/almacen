@@ -1,6 +1,7 @@
 .enlace
     i.bi.bi-house-fill
-    a(href='/') Inicio 
+    a( onclick="accederDashboard()") Inicio 
+
 
 .enlace
     i.bi.bi-cart-fill
@@ -12,11 +13,11 @@
     i.bi.bi-clock-history
     span Historial
 .enlace
-    i.bi.bi-file-earmark-fill
-    span Documentos
+    i.bi.bi-filetype-pdf
+    a(href='/pdf') Reporte
 .enlace
     i.bi.bi-person-circle
-    a(href='/users') Usuario
+    a(onclick="accedercategoria()") Categoria
 //.enlace 
     i.bi.bi-box-arrow-in-left
     button.btn.btn-success(type='button'   onclick="cerrarSesion()" )

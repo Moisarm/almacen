@@ -90,8 +90,9 @@ async function acceder(){
 
 
     window.sessionStorage.setItem(`token`, data.response.token)
-
-
+    window.sessionStorage.setItem(`username`, username)  
+    window.sessionStorage.setItem(`rol`, username)  
+    //window.sessionStorage.setItem(`usernameId`, data.response.usernameId)  ESTE TENGO QUE AGREGARLO!!! 
 
     window.location.assign("/dashboard/?token="+window.sessionStorage.getItem("token"))
 
@@ -112,15 +113,21 @@ async function accederProducto(){
 
     window.location.assign("/tablas/producto/?token="+window.sessionStorage.getItem("token"))
 }
+async function accederDashboard(){
+
+    window.location.assign("/dashboard/?token="+window.sessionStorage.getItem("token"))
+}
 async function accedercategoria(){
 
     window.location.assign("/tablas/tipo-producto/?token="+window.sessionStorage.getItem("token"))
 }
-async function accederProducto(){
+async function accederusuario(){
 
-    window.location.assign("/tablas/producto/?token="+window.sessionStorage.getItem("token"))
+    window.location.assign("/users/?token="+window.sessionStorage.getItem("token"))
 }
 async function cerrarSesion(){
     
     window.sessionStorage.clear()
 }
+
+

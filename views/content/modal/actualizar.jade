@@ -41,7 +41,7 @@
 
         .modal-footer
           button.btn.btn-secondary(type='button' data-bs-dismiss='modal') Cerrar
-        if nombreTabla==="producto"
-          button.btn.btn-primary#actualizarCategoria(type='button' onclick="idProductoActualizar()") Save changes
-        else 
-          button.btn.btn-primary#actualizarCategoria(type='button' onclick="idCategoriaActualizar()") Save changes
+          if nombreTabla==="producto"
+            button.btn.btn-primary#actualizarCategoria(type='button' onclick="idProductoActualizar()") Save changes
+          else 
+            button.btn.btn-primary#actualizarCategoria(type='button' onclick="idCategoriaActualizar()") Save changes

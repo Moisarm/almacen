@@ -1,0 +1,28 @@
+extends ../layout/layout
+
+block content
+
+
+body
+h1 Datos en Gráfico de Dona
+canvas#myChart(width="400", height="400")
+
+script.
+    Obtener datos desde el backend y procesarlos
+    const dataFromServer = !{JSON.stringify(data)};
+    const labels = dataFromServer.map(item => item.label);
+    const values = dataFromServer.map(item => item.value);
+
+    const ctx = document.getElementById('myChart').getContext('2d');
+    new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: labels,
+        datasets: [{
+        label: 'Datos',
+        data: values,
+        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+        }]
+    }
+    });
+

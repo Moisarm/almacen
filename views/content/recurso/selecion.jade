@@ -1,26 +1,32 @@
 
 #ModalBuscar.modal.fade(tabindex='-1', aria-labelledby='exampleModalLabel', aria-hidden='true')
     .modal-dialog
-    .modal-content
-        .modal-header
-        h1#exampleModalLabel.modal-title.fs-5 Filtrar Productos
-        button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
-        .modal-body
-        form(action="/Filtro", method="PUT") 
-            .col-auto
-            label(for="Precio Minimo") 
-                input#inputPassword6.form-control(type='text' aria-describedby='passwordHelpInline' placeholder="Precio Min")
 
-            label(for="Preciobutton.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')")     
-                input#inputPassword6.form-control(type='text' aria-describedby='passwordHelpInline' placeholder="Precio Max")
-            .col-auto
-                input#inputPassword6.form-control(type='text' aria-describedby='passwordHelpInline' placeholder="Cantidad" )
-            .col-auto
-                select#idCategoria.form-select(name='idCategoria')
-                        each item in categoria
-                            each val, key in item
-                                option(value=key) #{val}
-        | ...
-        .modal-footer
-        button.btn.btn-secondary(type='button', data-bs-dismiss='modal') Close
-        button.btn.btn-primary(type='button') Save changes
+        .modal-content
+            .modal-header
+                h1#exampleModalLabel.modal-title.fs-5 Filtrar Productos
+                button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+            .modal-body
+                form(action="/Filtro", method="PUT") 
+                    .row
+                        .col-sm-3
+                            label(for="Precio Minimo") 
+                                input#inputPassword6.form-control(type='text' aria-describedby='passwordHelpInline' placeholder="Precio Min")
+                        .col-sm-3
+                            label(for="Preciobutton.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')")     
+                                input#inputPassword6.form-control(type='text' aria-describedby='passwordHelpInline' placeholder="Precio Max")
+                        .col-md-6
+                            input#inputPassword6.form-control(type='text' aria-describedby='passwordHelpInline' placeholder="Cantidad" )
+                    .row
+                        .col-sm-12 
+                            p 
+                    .row
+                        .col-sm-12
+                            select#idCategoria.form-select(name='idCategoria')
+                                each item in categoria
+                                    each val, key in item
+                                        option(value=key) #{val}
+                
+            .modal-footer
+                button.btn.btn-secondary(type='button', data-bs-dismiss='modal') Close
+                button.btn.btn-primary(type='button') Save changes

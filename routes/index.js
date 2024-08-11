@@ -152,7 +152,7 @@ router.get('/tablas/:nombreTabla/',verifyToken, async function (req, res, next) 
           username:"Moises",
           tHead:[  ],
           tBody:[],
-          isOk:false
+          isOk:false,
         
         }
         break;

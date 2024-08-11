@@ -13,14 +13,14 @@ async function enviarNuevaProducto(e){
     // nombre = JSON.stringify(nombre);
     //  e.preventDefault()
     console.log({nombre})
-    await fetch('http://localhost:3000/producto/nuevo',  // fetch para enviar el dato
+    await fetch(`http://localhost:3000/producto/nuevo?token=${window.sessionStorage.getItem('token')}`,  // fetch para enviar el dato
     {
         method:"POST",
         headers:{
             'Content-Type':'application/json', 
             accept: 'application/json',
             'User-agent': 'learning app',
-   
+            //'User-id':window.sessionStorage.getItem('usernameId'),
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "POST, GET, PUT",
             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"

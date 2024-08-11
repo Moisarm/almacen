@@ -111,17 +111,19 @@ async function createUser(){
 }
 
 
-async function actualizarUser(){
+
+//para eliminar el usuario
+async function eliminarUser(){
     console.log(`id global: ${idActualizarUsuarioGlobal}`)
     console.log("Actualizar Producto")
 
-    let nombre = document.getElementById('nombreUserUpdate').value
-    let apellido = document.getElementById('apellidoUpdate').value
-    let role = document.getElementById('roleUpdate').value
+    // let nombre = document.getElementById('nombreUserUpdate').value
+    // let apellido = document.getElementById('apellidoUpdate').value
+    // let role = document.getElementById('roleUpdate').value
     
-    console.log(`***********************`)
-    console.log({nombre, apellido, role})
-    console.log(`***********************`)
+    // console.log(`***********************`)
+    // console.log({nombre, apellido, role})
+    // console.log(`***********************`)
     
     console.log(`esto es actualizar`)
     
@@ -131,7 +133,7 @@ async function actualizarUser(){
 
     // FETCH QUE LLAME A LA API PARA ACTUALIZAR
     
-    fetch('http://localhost:3000/users/actualizar/'+idActualizarUsuarioGlobal,
+    fetch('http://localhost:3000/users/eliminar/'+idActualizarUsuarioGlobal,
         // fetch para enviar el dato
    {
        method:"PUT",
@@ -144,7 +146,7 @@ async function actualizarUser(){
            "Access-Control-Allow-Methods": "POST, GET, PUT",
            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
        },
-       body:JSON.stringify( {nombre, apellido, role}) //Aquí se envía
+    //    body:JSON.stringify( {nombre, apellido, role}) //Aquí se envía
    })
    .then(res => {res.json()
     location.reload();

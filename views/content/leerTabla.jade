@@ -1,22 +1,14 @@
 extends ../layout/layout
 
 block content
+    .usr
     if isOk    
         //-p LA TABLA A MOSTRAR ES : #{nombreTabla}
 
         //filtros
-        .btn-group.dropend
-            button.btn.btn-secondary.dropdown-toggle(type='button' data-bs-toggle='dropdown' aria-expanded='false')
-                | Tablas
-            ul.dropdown-menu
-                // Dropdown menu links
-                li
-                    a.dropdown-item(onclick="accederProducto()") Producto
-                li
-                       a.dropdown-item(onclick="accedercategoria()") Categoria
         
         button.btn.btn-success(type='button' data-bs-toggle='modal' data-bs-target='#nuevaCatModal')  Nuevo
-         
+        
         include modal/nuevaCat
         
         if nombreTabla ==='producto'
@@ -25,13 +17,13 @@ block content
 
         else 
 
-              
+            
 
 
         //bootstrap tabla
         .row
             .col12
-               table.table.table-bordered.border-primary 
+            table.table.table-bordered.border-primary 
                     //table.table.table-dark
                     thead
                         tr
@@ -82,5 +74,5 @@ block content
         script.
             alert("Tabla no Encontrada")
             window.location.href='http://localhost:3000/';
-                          
+                        
                         
