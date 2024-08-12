@@ -16,7 +16,7 @@ const HistorialSchema = new Schema({
     idUser:{
         type:Schema.Types.ObjectId,
         ref:user,
-        required:true
+        // required:true
     },
 
     cantidad:{type:Number},

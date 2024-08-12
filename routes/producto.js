@@ -25,12 +25,14 @@ router.post('/nuevo',async function(req, res) {
             /// SI ES TRUE    
             let respProducto = await postProducto(req.body)
             //SI ES FALSE
+
+            console.log(respProducto)
         
             if(respProducto){
 
 
                 createHistorial({
-                    idProducto:respProducto[0]._id,
+                    idProducto:respProducto._id,
                 
                     idUser:null,
                 
@@ -251,17 +253,17 @@ router.put('/Actualizar/:_id', async function (req, res) {
         let updateProducto = await actualizarProducto({_id:req.params._id}, req.body)
         if(updateProducto){
 
-            createHistorial({
-                idProducto:req.params._id,
+            // createHistorial({
+            //     idProducto:req.params._id,
             
-                idUser:null,
+            //     idUser:null,
             
-                cantidad: req.body.stock,
-                estado:"nuevo",
-                fecha:new Date(),
+            //     cantidad: req.body.stock,
+            //     estado:"nuevo",
+            //     fecha:new Date(),
 
-                // foto:{type, default:null},
-            })
+            //     // foto:{type, default:null},
+            // })
             res.status(200).json({
                 status:200,
                 code:2000,

@@ -7,9 +7,11 @@ let createHistorial = async(body)=>{
     
    try{
 
-       let user = new Historial(body);//esta si valido antes
+    console.log(body)
+    console.log(`%%%%%%%%`)
+       let historyOb = new Historial(body);//esta si valido antes
 
-       let respCreateHistorial = await user.save()
+       let respCreateHistorial = await historyOb.save()
        .then(resp=>{
            console.log(resp)
 

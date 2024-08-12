@@ -25,7 +25,7 @@ let login = async (username,password )=>{
         }
         if (username === userDB.userName && passOk) {
           console.log(`COincide`)
-          const token = jwt.sign({ username }, ENV.JWT_SECRET, { expiresIn: ENV.JWT_EXPIRES });
+          const token = jwt.sign({ username }, ENV.JWT_SECRET, { expiresIn: "1m" });
 
           return {status:200,
             response: {token}
@@ -56,16 +56,21 @@ let verifyToken = async (req, res, next) =>{
     console.log(req)
     console.log(token)
     if (!token) {
-      return res.status(401).json({ message: "Token not provied" });
+    //   return res.status(401).json({ message: "Token not provied" });
+      return   res.redirect('/');
+
     }
     try {
       const payload = jwt.verify(token, ENV.JWT_SECRET);
       console.log(payload)
       req.username = payload.username;
       req.tokenUser = token
+
       next();
     } catch (error) {
-      return res.status(403).json({ message: "Token not valid" });
+    //   return res.status(403).json({ message: "Token not valid" });
+      return   res.redirect('/');
+
     }
   }
 

@@ -26,7 +26,7 @@ let postProducto = async (body)=>{
         .then(resp=>{
             console.log(resp)
 
-            return true
+            return resp
 
             //true
         }).catch(err=>{
