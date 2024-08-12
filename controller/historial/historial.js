@@ -37,26 +37,54 @@ let createHistorial = async(body)=>{
 }
 
 //Mostrar usuarios
-let allHistorial = async (query={})=>{
+let mostrarHistorial = async (query={}, optionsPage, sort= {_id:-1} ,select = '', )=> {
     try {
-        const objUser = await Historial
-        .find(query)
-        .lean()
-        .select()
-        
-        .then(resultadoHistorial=>{
-          console.log(`-----------------`)
-          
-          return resultadoHistorial
+      const objHistorial = await Historial
+      .find(query)
+      .lean()
+      .sort(sort)
+      .select(select)
+      .skip(optionsPage.page * optionsPage.limit)
+      .limit(optionsPage.limit)
+      .populate({ path: 'idCategoria', select: 'categoria_nombre' })
+      
+      .then(async (resultadoProducto)=>{
+        console.log(`-----------------`)
+
+        // console.log(ob)
+
+        resultadoProducto.map(obj=>{
+
+            obj.idCategoria = obj.idCategoria.categoria_nombre
         })
-      //   console.log(producto)
-  
-        return objUser
 
 
+            const count = await 
+            Historial //clase del modelo. 
+            .find(query)// busqueda, el query debe ser un JSON.
+            .lean()// simplifica el obj retornado, (se utiliza en base de datos GRANDES)
+            .countDocuments({})//cuenta la cantidad de objetos traidos en la busqueda. (total, sin paginacion.)
+            .sort({_id:-1}) //ordena la busqueda, de la mas nueva a la vieja.0
+
+            let response = {
+                objects: count,//cantidad total
+                pages: Math.round(count/optionsPage.limit), //cantidad de paginas, es la division de objetos totales entre el limite
+                current: optionsPage.page, //pagina actual
+                data:resultadoProducto// registros encontrados
+
+            }
+
+
+        return response
+      })
+    //   console.log(producto)
+
+      return objHistorial
     } catch (error) {
-        console.error(`Error: allHistorial`)
+
         console.error(error)
+        console.log(`Error mostrar producto`)
+        
     }
 }
 
@@ -122,7 +150,7 @@ let oneHistorial = async (query)=>{
 
 module.exports={
     createHistorial,
-    allHistorial,
+    mostrarHistorial,
     actualizarHistorial,
     oneHistorial,
 

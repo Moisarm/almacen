@@ -94,53 +94,32 @@ router.get('/tablas/:nombreTabla/',verifyToken, async function (req, res, next) 
 
         break;
       case "tipo-producto":
-          let resTipoProducto = await mostrarCategoria()
+          let r2esTipoProducto2 = await mostrarCategoria({},optionsPage )
+          let catData = r2esTipoProducto2.data
 
-          console.log(resTipoProducto.length)
+          console.log(catData.length)
           console.log('--------------------------------')
-          console.log(resTipoProducto)
+          console.log(catData)
 
           let tHead =[]
 
-          for (const key in resTipoProducto[0]) {
+          for (const key in catData[0]) {
             tHead.push(key)
 
           }
 
           // tHead.pop()
 
-          for (let index = 0; index < resTipoProducto.length; index++) {
-            // console.log(resTipoProducto)
+          for (let index = 0; index < catData.length; index++) {
+            // console.log(catData)
 
-            resTipoProducto[index].ultimo = true
-            // resTipoProducto[index].createdAt = formatoFecha(resTipoProducto[index].createdAt)
-            delete resTipoProducto[index].__v
+            catData[index].ultimo = true
+            // catData[index].createdAt = formatoFecha(catData[index].createdAt)
+            delete catData[index].__v
             
           }
 
 
-
-
-
-          // console.log([
-          //   {
-          //     _id: '66aebaadd51461b5d4e53cbe',
-          //     categoria_nombre: 'Betico',
-          //     isDelete: false,
-          //     createdAt: "2024-08-03T23:18:06.046Z",
-          //     updatedAt:" 2024-08-03T23:18:06.046Z",
-          //     __v: 0,
-          //     ultimo
-          //   },
-          //   {
-          //     _id: '66b2056f30963dd4cfae358b',
-          //     categoria_nombre: 'Chucherías',
-          //     isDelete: false,
-          //     createdAt: "2024-08-06T11:13:51.336Z",
-          //     updatedAt:" 2024-08-06T11:13:51.336Z",
-          //     __v: 0,
-          //     ultimo
-          //   }])
 
           render = { 
           isOk:true,
@@ -150,8 +129,11 @@ router.get('/tablas/:nombreTabla/',verifyToken, async function (req, res, next) 
 
             username:"Moises",
             tHead,
-            tBody:resTipoProducto
+            tBody:catData,
             
+          objects: r2esTipoProducto2.objects,
+          pages:r2esTipoProducto2.pages,
+          current:r2esTipoProducto2.current
           
           }
 
