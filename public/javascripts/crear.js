@@ -13,7 +13,7 @@ async function enviarNuevaProducto(e){
     // nombre = JSON.stringify(nombre);
     //  e.preventDefault()
     console.log({nombre})
-    await fetch(`http://localhost:3000/producto/nuevo?token=${window.sessionStorage.getItem('token')}`,  // fetch para enviar el dato
+    await fetch(`/producto/nuevo?token=${window.sessionStorage.getItem('token')}`,  // fetch para enviar el dato
     {
         method:"POST",
         headers:{
@@ -56,7 +56,7 @@ function enviarNuevaCategoria(){
     // nombre = JSON.stringify(nombre);
     // e.preventDefault()
     console.log({categoria_nombre})
-    fetch('http://localhost:3000/categoria/nuevo',
+    fetch('/categoria/nuevo',
          // fetch para enviar el dato
     {
         method:"POST",

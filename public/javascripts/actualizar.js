@@ -34,7 +34,7 @@ async function idCategoriaActualizar(){
   
 
     // FETCH QUE LLAME A LA API PARA ACTUALIZAR
-    fetch('http://localhost:3000/categoria/actualizar/'+idActualizarCategoriaGlobal,
+    fetch('/categoria/actualizar/'+idActualizarCategoriaGlobal,
         // fetch para enviar el dato
    {
        method:"PUT",
@@ -86,7 +86,7 @@ async function idProductoActualizar(){
 
     // FETCH QUE LLAME A LA API PARA ACTUALIZAR
     
-    fetch('http://localhost:3000/producto/actualizar/'+idActualizarProductoGlobal,
+    fetch('/producto/actualizar/'+idActualizarProductoGlobal,
         // fetch para enviar el dato
    {
        method:"PUT",
@@ -123,7 +123,7 @@ async function actualizarCategoria(){
     // e.preventDefault()
     console.log({codigo})
 
-   await fetch('http://localhost:3000/categoria/nuevo',
+   await fetch('/categoria/nuevo',
          // fetch para enviar el dato
     {
         method:"POST",
