@@ -64,7 +64,7 @@ router.get('/tablas/:nombreTabla/',verifyToken, async function (req, res, next) 
 
       case "producto":
         //llama a la función del controller
-        let resProducto = await mostrarProducto({},optionsPage )
+        let resProducto = await mostrarProducto({isDelete:false},optionsPage )
         let resCategoria = await mostrarCategoria({},{
           page:0,
           limit:400
@@ -115,7 +115,7 @@ router.get('/tablas/:nombreTabla/',verifyToken, async function (req, res, next) 
 
         break;
       case "tipo-producto":
-          let r2esTipoProducto2 = await mostrarCategoria({},optionsPage )
+          let r2esTipoProducto2 = await mostrarCategoria({isDelete:false},optionsPage )
           let catData = r2esTipoProducto2.data
 
           console.log(catData.length)
