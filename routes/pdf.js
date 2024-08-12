@@ -12,7 +12,7 @@ router.get('/', async (req, res) =>{
     try {
         // const datos = await Producto.find(); // Obtener datos de la base de datos
         
-        const datos = await mostrarProducto({},{page:0, limit:300},{precio:-1},  'nombre precio stock', {precio:-1})
+        const datos = await mostrarProducto({},{page:0, limit:300},{stock:1},  'nombre precio stock', {precio:-1})
         const stream = res.writeHead(200, {
             "Content-Type": "application/pdf",
             "Content-Disposition": "attachment; filename=invoice.pdf",

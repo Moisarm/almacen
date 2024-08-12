@@ -15,11 +15,28 @@ router.get('/',  function(req, res, next) {
   res.render('content/login', { title: 'Express' , username:"Moises"});
 });
 
-router.get('/dashboard', verifyToken, function(req, res, next) {
+router.get('/dashboard', verifyToken,async function(req, res, next) {
+  try {
+    // Obtener la cantidad de productos por categoría
+    const productosPorCategoria = await Producto.aggregate([
+      { $match: { isDelete: false } },
+      { $group: { _id: '$idCategoria', count: { $sum: 1 } } },
+      { $lookup: {
+        from: 'categorias',
+        localField: '_id',
+        foreignField: '_id',
+        as: 'categoria'
+      }},
+      { $unwind: '$categoria' },
+      { $project: { _id: 0, categoria_nombre: '$categoria.categoria_nombre', count: 1 } }
+    ]);
 
-
-  res.render('content/index', { title: 'Express' , username:"Moises"});
+    res.render('content/Dashboard', { data: productosPorCategoria });
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
 });
+
 
 /*Ruta de tablas Tablas */
 router.get('/tablas/:nombreTabla/',verifyToken, async function (req, res, next) {
@@ -48,9 +65,13 @@ router.get('/tablas/:nombreTabla/',verifyToken, async function (req, res, next) 
       case "producto":
         //llama a la función del controller
         let resProducto = await mostrarProducto({},optionsPage )
-        let resCategoria = await mostrarCategoria()
+        let resCategoria = await mostrarCategoria({},{
+          page:0,
+          limit:400
+      })
+        console.log(resCategoria)
 
-        let mapCat = resCategoria.map(obj=>{
+        let mapCat = resCategoria.data.map(obj=>{
 
           return {
             [obj._id]:obj.categoria_nombre

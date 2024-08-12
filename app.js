@@ -10,6 +10,7 @@ const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const PDFDocument = require('pdfkit');
 const pdfkitTable = require('pdfkit-table');
+const Chart=require('chart.js')
 // const PDFDocument = require('pdfkit');
 const bodyParser = require("body-parser"); 
 

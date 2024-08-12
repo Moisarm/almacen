@@ -63,7 +63,7 @@ async function ActualizarUsuario(){
 }
 
 
-
+/// API REST FULL
 
 
 async function createUser(){
@@ -113,8 +113,8 @@ async function createUser(){
 
 
 //para eliminar el usuario
-async function eliminarUser(){
-    console.log(`id global: ${idActualizarUsuarioGlobal}`)
+async function eliminarUser(idusere){
+    console.log(`id global: ${idusere}`)
     console.log("Actualizar Producto")
 
    
@@ -124,7 +124,7 @@ async function eliminarUser(){
 
     // FETCH QUE LLAME A LA API PARA eliminar
     
-    fetch('/users/eliminar/'+idActualizarUsuarioGlobal,
+    fetch('/users/eliminar/'+idusere,
         // fetch para enviar el dato
    {
        method:"PUT",
@@ -145,7 +145,7 @@ async function eliminarUser(){
    .then(data => {
     console.log(data)
     console.log("Se está enviando la api")
-    location.reload();
+   location.reload();
 
 })
 }

@@ -25,7 +25,7 @@ let login = async (username,password )=>{
         }
         if (username === userDB.userName && passOk) {
           console.log(`COincide`)
-          const token = jwt.sign({ username }, ENV.JWT_SECRET, { expiresIn: "1m" });
+          const token = jwt.sign({ username }, ENV.JWT_SECRET, { expiresIn: ENV.JWT_EXPIRES });
 
           return {status:200,
             response: {token}

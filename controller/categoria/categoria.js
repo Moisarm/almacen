@@ -51,7 +51,7 @@ let postCategoria = async (body)=>{
 
 //Mostrar todas las categorias
 //Mostrar usuarios
-let mostrarCategoria = async (query={}, optionsPage, sort= {_id:-1} ,select = '', )=> {
+let mostrarCategoria = async (query={}, optionsPage, sort= {_id:-1} ,select = 'categoria_nombre createdAt', )=> {
     try {
       const objHistorial = await Categoria
       .find(query)
@@ -60,18 +60,11 @@ let mostrarCategoria = async (query={}, optionsPage, sort= {_id:-1} ,select = ''
       .select(select)
       .skip(optionsPage.page * optionsPage.limit)
       .limit(optionsPage.limit)
-      .populate({ path: 'idCategoria', select: 'categoria_nombre' })
       
       .then(async (resultadoProducto)=>{
         console.log(`-----------------`)
 
         // console.log(ob)
-
-        resultadoProducto.map(obj=>{
-
-            obj.idCategoria = obj.idCategoria.categoria_nombre
-        })
-
 
             const count = await 
             Categoria //clase del modelo. 

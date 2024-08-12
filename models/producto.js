@@ -18,7 +18,10 @@ const ProductoSchema = new Schema({
 
     nombre:{type:String},
     
-    codigo:{type:String},
+    codigo:{type:String,
+        index: true,
+        unique: true
+    },
     precio:{type:Number},
     stock:{type:Number},
     foto:{type:String, default:null},
