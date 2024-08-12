@@ -11,15 +11,19 @@ nav.navbar.navbar-dark.bg-dark.fixed-top
             
             ul.navbar-nav.justify-content-end.flex-grow-1.pe-3
               li.nav-item
-               
-                a.nav-link.active(aria-current='page', onclick="accederDashboardl()") Dashboard
+                i.bi.bi-pie-chart-fill
+                a.nav-link.active(aria-current='page', onclick="accederDashboard()") Dashboard
               li.nav-item
+                i.bi.bi-clock-history
                 a.nav-link(onclick="accederHistorial()") Historial
               li.nav-item
+                i.bi.bi-filetype-pdf
                 a.nav-link(href='/pdf') Reporte
               li.nav-item
+                i.bi.bi-person-fill-lock
                 a.nav-link(onclick="accederusuario()") Usuarios  
               li.nav-item.dropdown
+                i.bi.bi-database-fill
                 a.nav-link.dropdown-toggle(href='#', role='button', data-bs-toggle='dropdown', aria-expanded='false')
                   | Tablas
                 ul.dropdown-menu.dropdown-menu-dark
@@ -29,6 +33,10 @@ nav.navbar.navbar-dark.bg-dark.fixed-top
                     a.dropdown-item(onclick="accederProducto()") Producto
                   li
                     hr.dropdown-divider
+              li.nav-item
+                i.bi.bi-box-arrow-in-left
+                a.nav-link(onclick="accederusuario()") Cerrar Sesión
+                    
                     
                  
            

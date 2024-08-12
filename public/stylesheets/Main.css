@@ -96,8 +96,8 @@
 
 
 .footer{
-    background-color: rgb(158, 90, 226);
-
+    background-color: rgb(93, 1, 185);
+    color: white;
     /* margin: 1rem; */
     padding: 1rem;
     /* border: 2px solid #ccc; */
@@ -133,5 +133,14 @@
 }
 
 .page-link{
+    color: white;
     cursor: pointer;
+}
+
+.dropdown-item{
+    cursor: pointer;
+}
+
+i{
+    font-size: 20px;
 }
