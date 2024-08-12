@@ -12,7 +12,7 @@
 /*Funcion para Crear Producto */
 
 
-
+var ip = '192.168.1.10'
 
 
 //Muestra el Producto actual en el Modulo Actualizar
@@ -22,7 +22,7 @@ async function productoActual(Id) {
     console.log("El id es: "+Id)
 
     //Consume La Api
-    await fetch('http://localhost:3000/producto/'+Id,{
+    await fetch('/producto/'+Id,{
 
     }).then(res=>res.json)
     .then (data=>{
@@ -66,7 +66,7 @@ async function acceder(){
     console.log({username, password})
     console.log(`***********************`)
 
-    fetch('http://localhost:3000/login/',
+    fetch(`/login/`,
         // fetch para enviar el dato
     {
        method:"POST",
@@ -87,14 +87,18 @@ async function acceder(){
     .then(res => res.json())
     .then(data => {
     console.log(data)
+        //si no t
+        if(data.response.token){
+            window.sessionStorage.setItem(`token`, data.response.token)
+            window.sessionStorage.setItem(`username`, username)  
+            window.sessionStorage.setItem(`rol`, username)  
+            //window.sessionStorage.setItem(`usernameId`, data.response.usernameId)  ESTE TENGO QUE AGREGARLO!!! 
+        
+            window.location.assign("/dashboard/?token="+window.sessionStorage.getItem("token"))
 
-
-    window.sessionStorage.setItem(`token`, data.response.token)
-    window.sessionStorage.setItem(`username`, username)  
-    window.sessionStorage.setItem(`rol`, username)  
-    //window.sessionStorage.setItem(`usernameId`, data.response.usernameId)  ESTE TENGO QUE AGREGARLO!!! 
-
-    window.location.assign("/dashboard/?token="+window.sessionStorage.getItem("token"))
+        }else{
+            //alert
+        }
 
     })
 

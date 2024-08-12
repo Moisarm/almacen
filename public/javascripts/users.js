@@ -34,7 +34,7 @@ async function ActualizarUsuario(){
 
     // FETCH QUE LLAME A LA API PARA ACTUALIZAR
     
-    fetch('http://localhost:3000/users/actualizar/'+idActualizarUsuarioGlobal,
+    fetch('/users/actualizar/'+idActualizarUsuarioGlobal,
         // fetch para enviar el dato
    {
        method:"PUT",
@@ -85,7 +85,7 @@ async function createUser(){
     // nombre = JSON.stringify(nombre);
     //  e.preventDefault()
     console.log({nombre})
-    await fetch('http://localhost:3000/users/nuevo',  // fetch para enviar el dato
+    await fetch('/users/nuevo',  // fetch para enviar el dato
     {
         method:"POST",
         headers:{
@@ -133,7 +133,7 @@ async function eliminarUser(){
 
     // FETCH QUE LLAME A LA API PARA ACTUALIZAR
     
-    fetch('http://localhost:3000/users/eliminar/'+idActualizarUsuarioGlobal,
+    fetch('/users/eliminar/'+idActualizarUsuarioGlobal,
         // fetch para enviar el dato
    {
        method:"PUT",

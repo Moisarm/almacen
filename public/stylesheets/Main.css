@@ -17,6 +17,7 @@
     padding: 0;
 }    
 
+
 *a{
     cursor: pointer;
     text-decoration: none;
@@ -121,4 +122,16 @@
     /* border: 2px solid #ccc; */
     /* IMPORTANTE */
     text-align: center;
+}
+
+.nav-link.active{
+    cursor: pointer;
+}
+
+.nav-link{
+    cursor: pointer;
+}
+
+.page-link{
+    cursor: pointer;
 }
