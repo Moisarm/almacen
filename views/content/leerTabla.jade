@@ -23,36 +23,41 @@ block content
 
         //bootstrap tabla
         .row
-            .col12
-            table.table.table-bordered.border-primary 
-                    //table.table.table-dark
-                    thead
-                        tr
-                            each item in tHead
-                                th= item
-                            //
-                                <th>Categoría</th>
-                                <th>Nombre del Producto</th>
-                                <th>Cantidad</th>
-                                <th>Código</th>
-                                <th>Precio</th>
-                    tbody#tbody
-                        each item in tBody  
+            .col-lg-1
+                p
+            .col-lg-10
+                table.table.table-bordered.border-primary 
+                        //table.table.table-dark
+                        thead
                             tr
-                                - let _id = ''
-                                each val, key in item
-                                    if key == "_id"
-                                        - _id = val
-                                    else
-                                        td=val 
-                                td
-                                    button.btn.btn-success#showActualizar(type='button' data-bs-toggle='modal' data-bs-target='#actualizarModal' onclick="changeIdActualizar('"+ _id +"', '"+nombreTabla+"')" )
-                                        |Actualizar
-                                    include modal/actualizar
-                                td
-                                    button.btn.btn-danger(type='submit') 
-                                        |Eliminar
+                                each item in tHead
+                                    th= item
+                                //
+                                    <th>Categoría</th>
+                                    <th>Nombre del Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Código</th>
+                                    <th>Precio</th>
+                        tbody#tbody
+                            each item in tBody  
+                                tr
+                                    - let _id = ''
+                                    each val, key in item
+                                        if key == "_id"
+                                            - _id = val
+                                        else
+                                            td=val 
+                                    td
+                                        button.btn.btn-success#showActualizar(type='button' data-bs-toggle='modal' data-bs-target='#actualizarModal' onclick="changeIdActualizar('"+ _id +"', '"+nombreTabla+"')" )
+                                            |Actualizar
+                                        include modal/actualizar
+                                    td
+                                        button.btn.btn-danger(type='submit') 
+                                            |Eliminar
 
+            .col-lg-1
+                p
+            
         // boots de paginacion                            
         nav(aria-label='Page navigation example')
             ul.pagination.justify-content-end
