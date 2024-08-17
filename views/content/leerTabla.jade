@@ -43,18 +43,15 @@ block content
                                 each val, key in item
                                     if key == "_id"
                                         - _id = val
-                                    if key == 'ultimo'
-                                        td 
-                                            button.btn.btn-success#showActualizar(type='button' data-bs-toggle='modal' data-bs-target='#actualizarModal' onclick="changeIdActualizar('"+ _id +"', '"+nombreTabla+"')" )
-                                                |Actualizar
-                                            include modal/actualizar
-                                        td
-                                            button.btn.btn-danger(type='submit') 
-                                                |Eliminar
-                                            
-                                    else   
+                                    else
                                         td=val 
-
+                                td
+                                    button.btn.btn-success#showActualizar(type='button' data-bs-toggle='modal' data-bs-target='#actualizarModal' onclick="changeIdActualizar('"+ _id +"', '"+nombreTabla+"')" )
+                                        |Actualizar
+                                    include modal/actualizar
+                                td
+                                    button.btn.btn-danger(type='submit') 
+                                        |Eliminar
 
         // boots de paginacion                            
         nav(aria-label='Page navigation example')
