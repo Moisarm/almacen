@@ -113,6 +113,63 @@ async function idProductoActualizar(){
  
     //.catch(er=> alert) // aquí lo muestro en la consola
 }
+async function eliminarProCat(id, tablaName){
+
+
+    console.log(`id global: ${idActualizarProductoGlobal}`)
+    console.log("Actualizar Producto")
+
+    //let nombre = document.getElementById('productoNombre').value
+    //let codigo = document.getElementById('codigoProducto').value
+    //let precio = document.getElementById('precioProducto').value
+    //let stock = document.getElementById('stockProducto').value
+    //let idCategoria = document.getElementById('idCategoria').value
+    
+
+    
+    console.log(`esto es actualizar`)
+    console.log(`esto es actualizar3`)
+    console.log(`esto es actualizar2`)
+    //console.log(`eL ID ES: ${id}`)
+
+    let url = ""
+  
+    if(tablaName ==="producto"){
+        url='/producto/actualizar/'+id
+    }else{
+        url='/categoria/actualizar/'+id
+
+    }
+
+    // FETCH QUE LLAME A LA API PARA ACTUALIZAR
+    
+    fetch(url,
+        // fetch para enviar el dato
+   {
+       method:"PUT",
+       headers:{
+           'Content-Type':'application/json', 
+           accept: 'application/json',
+           'User-agent': 'learning app',
+
+           "Access-Control-Allow-Origin": "*",
+           "Access-Control-Allow-Methods": "POST, GET, PUT",
+           "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+       },
+       body:JSON.stringify( {isDelete:true}) //Aquí se envía
+   })
+   .then(res => {res.json()
+    location.reload();
+   })
+   .then(data => {
+    console.log(data)
+    console.log("Se está enviando la api")
+    location.reload();
+
+})
+ 
+    //.catch(er=> alert) // aquí lo muestro en la consola
+}
 
 async function actualizarCategoria(){
 

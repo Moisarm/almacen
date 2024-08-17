@@ -12,7 +12,7 @@
 /*Funcion para Crear Producto */
 
 
-var ip = '192.168.1.10'
+//var ip = '192.168.1.10'
 
 
 //Muestra el Producto actual en el Modulo Actualizar
@@ -97,7 +97,7 @@ async function acceder(){
             window.location.assign("/dashboard/?token="+window.sessionStorage.getItem("token"))
 
         }else{
-            //alert
+            window.alert("Usuario o Contraseña inválidos    ")
         }
 
     })

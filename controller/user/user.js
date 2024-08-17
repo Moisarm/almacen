@@ -64,7 +64,7 @@ let createUser = async(body)=>{
 let allUser = async ()=>{
     try {
         const objUser = await Users
-        .find()
+        .find({isDelete:false})
         .lean()
         .select('nombre apellido userName  role')
         

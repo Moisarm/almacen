@@ -302,6 +302,7 @@ router.put('/Actualizar/stock/:_id', async function (req, res) {
         console.log(req.params)
         console.log(req.body)
 
+        
         let data
 
         let getProducto = await mostrarProductOne({_id:req.params._id})

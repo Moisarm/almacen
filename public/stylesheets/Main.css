@@ -39,7 +39,7 @@
     width: 30px;
     height: 20px;
     font-size: 40px;
-    color: white;
+    color: rgba(255, 255, 255, 1) white;
     cursor:pointer;
     position: relative;
    
@@ -90,14 +90,15 @@
 
 
 
+
 .Main .table.table-bordered.border-primary table{
     background: rgb(100, 100, 100);
 }
 
 
 .footer{
-    background-color: rgb(158, 90, 226);
-
+    background-color: rgb(93, 1, 185);
+    color: white;
     /* margin: 1rem; */
     padding: 1rem;
     /* border: 2px solid #ccc; */
@@ -133,5 +134,14 @@
 }
 
 .page-link{
+    color: white;
     cursor: pointer;
+}
+
+.dropdown-item{
+    cursor: pointer;
+}
+
+i{
+    font-size: 22px;
 }
